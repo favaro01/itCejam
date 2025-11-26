@@ -1,11 +1,329 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT CEJAM</title>
-</head>
-<body>
+    <title>CEJAM - Tecnologia & Saúde</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal
+                            600: '#0d9488',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="gradient-bg min-h-screen flex flex-col overflow-x-hidden transition-colors duration-500 relative">
+
+    <!-- DECORAÇÃO DE FUNDO -->
+    <div class="fixed top-20 left-0 w-96 h-96 bg-teal-500/20 dark:bg-teal-600/10 rounded-full blur-[100px] -z-10 pointer-events-none blob-animate"></div>
+    <div class="fixed bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/20 dark:bg-blue-600/10 rounded-full blur-[120px] -z-10 pointer-events-none blob-animate-slow"></div>
+    <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-400/10 dark:bg-emerald-900/10 rounded-full blur-[130px] -z-10 pointer-events-none opacity-50"></div>
+
+    <!-- NAVEGAÇÃO -->
+    <div class="w-full border-b border-slate-200 dark:border-white/5 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-50 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-teal-500/20">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-800 dark:text-white">CEJAM <span class="font-light text-teal-600 dark:text-teal-400">| HealthTech</span></span>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-gray-400">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="font-semibold tracking-wider">OPERAÇÃO CLÍNICA: 100%</span>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-amber-300 focus:outline-none">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <div class="h-8 w-8 rounded-full bg-gradient-to-tr from-teal-500 to-blue-500 border-2 border-white/20 cursor-pointer"></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full relative z-10">
+        
+        <!-- HERO SECTION COM ANIMAÇÃO DNA -->
+        <div class="relative mb-16 py-10">
+            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full -z-10 opacity-60 pointer-events-none"></canvas>
+
+            <div class="text-center relative z-10">
+                <div class="inline-block mb-4 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-500/10 border border-teal-200 dark:border-teal-500/20 text-teal-700 dark:text-teal-300 text-sm font-medium animate-fade-in-up opacity-0">
+                    <i class="fas fa-dna mr-1"></i> Inovação Genética & Tecnológica
+                </div>
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-700 via-blue-600 to-teal-600 dark:from-white dark:via-teal-200 dark:to-blue-200 animate-fade-in-up delay-100 opacity-0 tracking-tight">
+                    O DNA da inovação<br>no cuidado à saúde.
+                </h1>
+                <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200 opacity-0 leading-relaxed">
+                    Conectando dados, tecnologia e humanização para salvar vidas e otimizar a gestão hospitalar.
+                </p>
+
+                <!-- BUSCA -->
+                <div class="max-w-xl mx-auto relative group animate-fade-in-up delay-200 opacity-0 z-50">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-200"></div>
+                    <div class="relative flex items-center bg-white dark:bg-slate-800/90 rounded-xl p-4 border border-slate-200 dark:border-teal-500/20 shadow-xl transition-colors">
+                        <i class="fas fa-search text-slate-400 ml-2"></i>
+                        <input type="text" id="search-input" placeholder="Busque por 'Prontuário', 'Impressora' ou 'WiFi'..." 
+                               class="w-full bg-transparent border-none outline-none text-slate-800 dark:text-white ml-4 placeholder-slate-400 dark:placeholder-slate-500" autocomplete="off">
+                        <span class="hidden md:block text-xs text-slate-400 border border-slate-300 dark:border-slate-600 rounded px-2 py-1 bg-slate-50 dark:bg-slate-700">Ctrl + K</span>
+                    </div>
+                    <div id="search-results" class="absolute top-full left-0 w-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-white/10 hidden overflow-hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACESSO RÁPIDO -->
+        <h3 class="text-slate-500 dark:text-slate-400 font-semibold text-sm uppercase tracking-wider mb-6 pl-2 border-l-4 border-teal-500">Serviços Essenciais</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 relative">
+            <div class="glass-card rounded-2xl p-6 cursor-pointer group">
+                <div class="h-12 w-12 rounded-lg bg-teal-100 dark:bg-teal-500/20 flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-laptop-medical text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-white">Suporte Clínico</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Equipamentos médicos, computadores e tablets das unidades.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 cursor-pointer group">
+                <div class="h-12 w-12 rounded-lg bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-heart-pulse text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-white">Sistemas de Saúde</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Prontuário Eletrônico (PEP), PACS e Telemedicina.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 cursor-pointer group">
+                <div class="h-12 w-12 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center mb-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-user-shield text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-white">Acessos & LGPD</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Liberação de perfis, VPN e proteção de dados de pacientes.</p>
+            </div>
+        </div>
+
+        <!-- MONITORAMENTO -->
+        <h3 class="text-slate-500 dark:text-slate-400 font-semibold text-sm uppercase tracking-wider mb-6 pl-2 border-l-4 border-blue-500">Monitoramento Assistencial</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <div class="lg:col-span-1 glass-card rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h4 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                        <i class="fas fa-activity text-teal-500"></i> Disponibilidade
+                    </h4>
+                    <span class="text-xs font-mono text-emerald-600 bg-emerald-100 dark:bg-emerald-500/10 px-2 py-1 rounded border border-emerald-200 dark:border-emerald-500/20">Normal</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 rounded-lg bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 transition cursor-help">
+                        <div class="flex items-center gap-3">
+                            <div class="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-200">PEP (Prontuário)</span>
+                        </div>
+                        <i class="fas fa-check-circle text-xs text-emerald-500 opacity-70"></i>
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-lg bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 transition cursor-help">
+                        <div class="flex items-center gap-3">
+                            <div class="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-200">Internet Unidades</span>
+                        </div>
+                        <i class="fas fa-wifi text-xs text-emerald-500 opacity-70"></i>
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-lg bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 transition cursor-help">
+                        <div class="flex items-center gap-3">
+                            <div class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                            </div>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-200">Imagens (PACS)</span>
+                        </div>
+                        <span class="text-[10px] text-amber-500 font-mono">Lentidão</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 glass-card rounded-2xl p-8">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-800 dark:text-white">Centro de Comando</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Indicadores de suporte às unidades</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="px-3 py-1 rounded bg-teal-500/10 border border-teal-500/20 text-teal-600 dark:text-teal-400 text-xs font-bold">
+                            <i class="fas fa-user-nurse mr-1"></i> 85 Unidades Online
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                    <div class="text-center md:text-left">
+                        <span class="text-4xl font-extrabold text-slate-800 dark:text-white block mb-1">124</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">Chamados Hoje</span>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <span class="text-4xl font-extrabold text-slate-800 dark:text-white block mb-1">08<small class="text-lg text-slate-400">min</small></span>
+                        <span class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">Tempo de Resposta</span>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <span class="text-4xl font-extrabold text-emerald-500 block mb-1">4.9</span>
+                        <div class="text-xs text-amber-400 mb-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">Satisfação Médica</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-700 dark:text-slate-300">SLA de Atendimento (Meta: 95%)</span>
+                            <span class="font-bold text-teal-600 dark:text-teal-400">98.5%</span>
+                        </div>
+                        <div class="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-teal-500 rounded-full progress-animate" style="width: 98.5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TECH RADAR & TIME -->
+        <h3 class="text-slate-500 dark:text-slate-400 font-semibold text-sm uppercase tracking-wider mb-6 pl-2 border-l-4 border-purple-500">Inovação em Saúde</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 glass-card rounded-2xl p-6 relative overflow-hidden">
+                <div class="flex items-center justify-between mb-6 relative z-10">
+                    <h4 class="text-lg font-bold text-slate-800 dark:text-white">Health Tech Radar</h4>
+                    <i class="fas fa-microscope text-teal-500"></i>
+                </div>
+                
+                <div class="relative w-full aspect-square bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 rounded-full border border-slate-200 dark:border-white/10 shadow-inner flex items-center justify-center overflow-hidden">
+                    <div class="radar-ring w-[75%] h-[75%]"></div>
+                    <div class="radar-ring w-[50%] h-[50%]"></div>
+                    <div class="radar-ring w-[25%] h-[25%] bg-teal-500/10 border-none"></div>
+                    
+                    <div class="absolute w-full h-[1px] bg-slate-300 dark:bg-white/10 top-1/2"></div>
+                    <div class="absolute h-full w-[1px] bg-slate-300 dark:bg-white/10 left-1/2"></div>
+                    <div class="radar-blip bg-teal-500 top-[45%] left-[52%]" title="Telemedicina (Adotado)"></div>
+                    <div class="radar-blip bg-teal-500 top-[55%] left-[45%]" title="Prontuário Cloud (Adotado)"></div>
+                    <div class="radar-blip bg-blue-400 top-[30%] left-[60%]" title="IoT Monitoramento (Teste)"></div>
+                    <div class="radar-blip bg-blue-400 top-[65%] left-[70%]" title="AI Diagnóstico (Teste)"></div>
+                    <div class="radar-blip bg-amber-400 top-[20%] left-[30%]" title="Blockchain Saúde (Avaliar)"></div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
+                    <div class="glass-card rounded-2xl p-6 relative overflow-hidden group rpg-card hover:bg-slate-50 dark:hover:bg-slate-800/80">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-400 flex items-center justify-center text-2xl text-white font-bold shadow-lg shadow-emerald-500/20">
+                                DS
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-white">Daniel Silva</h4>
+                                <p class="text-teal-600 dark:text-teal-400 text-sm font-medium mb-2">Coord. Infraestrutura</p>
+                                <div class="flex gap-1 text-xs text-slate-400">
+                                    <span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">Redes Hospitalares</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rpg-stats absolute bottom-0 left-0 w-full bg-slate-100 dark:bg-slate-900/90 backdrop-blur-md p-4 border-t border-slate-200 dark:border-white/10 opacity-0 translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                            <div class="space-y-2">
+                                <div>
+                                    <div class="flex justify-between text-[10px] uppercase font-bold text-slate-500 mb-1">Conectividade <span class="text-teal-500">98%</span></div>
+                                    <div class="h-1.5 w-full bg-slate-300 dark:bg-slate-700 rounded-full"><div class="h-full bg-teal-500 rounded-full" style="width: 98%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 relative overflow-hidden group rpg-card hover:bg-slate-50 dark:hover:bg-slate-800/80">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-400 flex items-center justify-center text-2xl text-white font-bold shadow-lg shadow-blue-500/20">
+                                AL
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-white">Ana Lima</h4>
+                                <p class="text-blue-500 dark:text-blue-400 text-sm font-medium mb-2">Engenharia Clínica IT</p>
+                                <div class="flex gap-1 text-xs text-slate-400">
+                                    <span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">Integração HL7</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rpg-stats absolute bottom-0 left-0 w-full bg-slate-100 dark:bg-slate-900/90 backdrop-blur-md p-4 border-t border-slate-200 dark:border-white/10 opacity-0 translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                            <div class="space-y-2">
+                                <div>
+                                    <div class="flex justify-between text-[10px] uppercase font-bold text-slate-500 mb-1">Sistemas <span class="text-blue-500">95%</span></div>
+                                    <div class="h-1.5 w-full bg-slate-300 dark:bg-slate-700 rounded-full"><div class="h-full bg-blue-500 rounded-full" style="width: 95%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="border-t border-slate-200 dark:border-white/5 py-8 text-center text-slate-500 dark:text-slate-600 text-sm relative z-10">
+        &copy; 2024 Inovação e Tecnologia CEJAM.
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div id="chat-window" class="hidden mb-4 w-80 sm:w-96 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-teal-500/20 overflow-hidden chat-enter flex flex-col h-[450px]">
+            <div class="bg-gradient-to-r from-teal-600 to-blue-600 p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-doctor text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-sm">Suporte CEJAM</h4>
+                        <p class="text-teal-100 text-xs flex items-center gap-1"><span class="w-2 h-2 bg-green-400 rounded-full"></span> Online</p>
+                    </div>
+                </div>
+                <!-- BOTÃO FECHAR COM ID (NOVO) -->
+                <button id="chat-close-btn" class="text-white/70 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="flex-1 p-4 overflow-y-auto bg-slate-50 dark:bg-slate-900 space-y-4">
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 bg-teal-100 dark:bg-teal-900/50 rounded-full flex-shrink-0 flex items-center justify-center text-teal-600 dark:text-teal-400 text-xs">IA</div>
+                    <div class="bg-white dark:bg-slate-800 p-3 rounded-r-xl rounded-bl-xl shadow-sm border border-slate-100 dark:border-white/5 text-sm text-slate-600 dark:text-slate-300">
+                        Olá! Como posso ajudar com seu equipamento ou sistema hoje?
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 pl-11">
+                    <button class="px-3 py-1 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400 text-xs rounded-full border border-teal-100 dark:border-teal-500/20 hover:bg-teal-100 transition">Erro no Prontuário</button>
+                    <button class="px-3 py-1 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400 text-xs rounded-full border border-teal-100 dark:border-teal-500/20 hover:bg-teal-100 transition">Troca de Toner</button>
+                </div>
+            </div>
+            <div class="p-3 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-white/5 flex gap-2">
+                <input type="text" placeholder="Descreva o problema..." class="flex-1 bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-white text-sm rounded-full px-4 focus:outline-none focus:ring-2 focus:ring-teal-500/50">
+                <button class="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center hover:bg-teal-700 transition"><i class="fas fa-paper-plane text-xs"></i></button>
+            </div>
+        </div>
+        <!-- BOTÃO FAB COM ID (NOVO) -->
+        <button id="chat-fab-btn" class="group relative w-14 h-14 bg-teal-600 hover:bg-teal-700 text-white rounded-full shadow-lg shadow-teal-600/30 flex items-center justify-center transition-all hover:scale-110">
+            <i class="fas fa-comment-medical text-2xl group-hover:hidden"></i>
+            <i class="fas fa-chevron-down text-xl hidden group-hover:block"></i>
+            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+        </button>
+    </div>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/data.js"></script>
 </body>
 </html>
