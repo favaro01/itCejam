@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inovação e Tecnologia CEJAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal
+                            600: '#0d9488',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="gradient-bg min-h-screen flex flex-col overflow-x-hidden transition-colors duration-500 relative">
+
+    <!-- DECORAÇÃO DE FUNDO -->
+    <div class="fixed top-20 left-0 w-96 h-96 bg-teal-500/20 dark:bg-teal-600/10 rounded-full blur-[100px] -z-10 pointer-events-none blob-animate"></div>
+    <div class="fixed bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/20 dark:bg-blue-600/10 rounded-full blur-[120px] -z-10 pointer-events-none blob-animate-slow"></div>
+    <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-400/10 dark:bg-emerald-900/10 rounded-full blur-[130px] -z-10 pointer-events-none opacity-50"></div>
+
+    <!-- NAVEGAÇÃO -->
+    <header class="w-full border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 transition-colors duration-500">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-teal-500/20">
+                <i class="fas fa-plus"></i>
+            </div>
+            <span class="font-bold text-lg tracking-tight text-slate-800 dark:text-white">CEJAM <span class="font-light text-teal-600 dark:text-teal-400">| Inovação</span></span>
+        </div>
+
+        <nav class="hidden md:flex flex-1 justify-center">
+            <ul id="main-menu-container" class="flex gap-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+                </ul>
+        </nav>
+        
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-gray-400">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="font-semibold tracking-wider">OPERAÇÃO: 100%</span>
+            </div>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-amber-300 focus:outline-none">
+                <i class="fas fa-moon dark:hidden"></i>
+                <i class="fas fa-sun hidden dark:block"></i>
+            </button>
+        </div>
+    </div>
+    </header>
+
+        <main class="max-w-7xl mx-auto px-6 py-12 min-h-screen overflow-x-auto">
+        
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-bold text-slate-800 dark:text-white">Estrutura Organizacional</h1>
+                <p class="text-slate-500">Conectando talentos e tecnologia</p>
+            </div>
+
+            <div id="org-chart-container" class="min-w-[800px] pb-20"></div>
+
+        </main>
+    
+    <footer class="border-t border-slate-200 dark:border-white/5 py-8 text-center text-slate-500 dark:text-slate-600 text-sm relative z-10">
+        &copy; 2024 Inovação e Tecnologia CEJAM.
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div id="chat-window" class="hidden mb-4 w-80 sm:w-96 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-teal-500/20 overflow-hidden chat-enter flex flex-col h-[450px]">
+            <div class="bg-gradient-to-r from-teal-600 to-blue-600 p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-doctor text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-sm">Suporte CEJAM</h4>
+                        <p class="text-teal-100 text-xs flex items-center gap-1"><span class="w-2 h-2 bg-green-400 rounded-full"></span> Online</p>
+                    </div>
+                </div>
+                <!-- BOTÃO FECHAR COM ID (NOVO) -->
+                <button id="chat-close-btn" class="text-white/70 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="flex-1 p-4 overflow-y-auto bg-slate-50 dark:bg-slate-900 space-y-4">
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 bg-teal-100 dark:bg-teal-900/50 rounded-full flex-shrink-0 flex items-center justify-center text-teal-600 dark:text-teal-400 text-xs">IA</div>
+                    <div class="bg-white dark:bg-slate-800 p-3 rounded-r-xl rounded-bl-xl shadow-sm border border-slate-100 dark:border-white/5 text-sm text-slate-600 dark:text-slate-300">
+                        Olá! Como posso ajudar com seu equipamento ou sistema hoje?
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 pl-11">
+                    <button class="px-3 py-1 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400 text-xs rounded-full border border-teal-100 dark:border-teal-500/20 hover:bg-teal-100 transition">Erro no Prontuário</button>
+                    <button class="px-3 py-1 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400 text-xs rounded-full border border-teal-100 dark:border-teal-500/20 hover:bg-teal-100 transition">Troca de Toner</button>
+                </div>
+            </div>
+            <div class="p-3 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-white/5 flex gap-2">
+                <input type="text" placeholder="Descreva o problema..." class="flex-1 bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-white text-sm rounded-full px-4 focus:outline-none focus:ring-2 focus:ring-teal-500/50">
+                <button class="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center hover:bg-teal-700 transition"><i class="fas fa-paper-plane text-xs"></i></button>
+            </div>
+        </div>
+        <!-- BOTÃO FAB COM ID (NOVO) -->
+        <button id="chat-fab-btn" class="group relative w-14 h-14 bg-teal-600 hover:bg-teal-700 text-white rounded-full shadow-lg shadow-teal-600/30 flex items-center justify-center transition-all hover:scale-110">
+            <i class="fas fa-comment-medical text-2xl group-hover:hidden"></i>
+            <i class="fas fa-chevron-down text-xl hidden group-hover:block"></i>
+            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+        </button>
+    </div>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/data.js"></script>
+</body>
+</html>

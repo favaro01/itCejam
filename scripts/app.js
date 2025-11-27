@@ -2,6 +2,77 @@ document.addEventListener('DOMContentLoaded', () => {
             const themeToggleBtn = document.getElementById('theme-toggle');
             const htmlElement = document.documentElement;
 
+            const menuContainer = document.getElementById('main-menu-container');
+
+            // --- LÓGICA DA NAVBAR ---
+            if (menuContainer && typeof portalData !== 'undefined') {
+                menuContainer.innerHTML = '';
+                portalData.menuItems.forEach(item => {
+                    const isActive = window.location.pathname.includes(item.link);
+
+                    const activeClasses = 'text-blue-900 dark:text-sky-400 font-bold border-b-2 border-blue-900 dark:border-sky-400';
+                    const inactiveClasses = 'text-gray-600 dark:text-gray-300 hover:text-blue-800 dark:hover:text-white';
+
+                    const colorClass = isActive ? activeClasses : inactiveClasses;
+
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="${item.link}" class="${colorClass} transition-colors py-1 block">${item.label}</a>`;
+                    menuContainer.appendChild(li);
+                });
+            }
+
+            // --- RENDERIZAÇÃO DO ORGANOGRAMA ---
+            const orgContainer = document.getElementById('org-chart-container');
+            
+            if (orgContainer && portalData.orgChart) {
+                const mgr = portalData.orgChart.manager;
+                const branches = portalData.orgChart.branches;
+
+                // HTML da Árvore
+                let treeHTML = `
+                    <div class="tree">
+                        <ul>
+                            <li>
+                                <div class="tree-card border-l-4 border-blue-600 !p-6 max-w-md mx-auto relative">
+                                    <i class="fas fa-quote-left text-4xl text-blue-100 absolute -top-4 -left-4"></i>
+                                    
+                                    <div class="flex flex-col items-center">
+                                        <img src="${mgr.photo}" class="w-20 h-20 rounded-full border-4 border-white shadow-lg mb-3">
+                                        <h3 class="text-xl font-bold text-blue-900 dark:text-white">${mgr.name}</h3>
+                                        <p class="text-sm text-blue-500 font-bold uppercase tracking-widest mb-4">${mgr.role}</p>
+                                        <p class="text-slate-500 dark:text-slate-300 italic font-serif text-sm">"${mgr.quote}"</p>
+                                    </div>
+                                </div>
+
+                                <ul>
+                                    ${branches.map(branch => `
+                                        <li>
+                                            <div class="tree-card min-w-[180px]">
+                                                <img src="${branch.leader.photo}" class="w-12 h-12 rounded-full mx-auto mb-2 border-2 border-slate-100">
+                                                <h4 class="font-bold text-slate-800 dark:text-white">${branch.leader.name}</h4>
+                                                <p class="text-xs text-blue-500 font-bold mb-2">${branch.leader.role}</p>
+                                            </div>
+                                            
+                                            <ul>
+                                                ${branch.team.map(member => `
+                                                    <li>
+                                                        <div class="tree-card !p-2 !text-xs bg-slate-50 dark:bg-slate-900">
+                                                            ${member}
+                                                        </div>
+                                                    </li>
+                                                `).join('')}
+                                            </ul>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+
+                orgContainer.innerHTML = treeHTML;
+            }
+
             // --- LÓGICA DARK MODE ---
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 htmlElement.classList.add('dark');
