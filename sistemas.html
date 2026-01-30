@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas e Aplicações - CEJAM</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cejam: {
+                            blue: '#0056b3',
+                            teal: '#14b8a6',
+                        }
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-cejam-teal rounded-lg flex items-center justify-center text-white font-bold">C</div>
+                <h1 class="text-2xl font-bold text-slate-800 tracking-tight">CEJAM <span class="text-cejam-teal font-light">Tech</span></h1>
+            </div>
+            <nav>
+                <ul class="flex items-center gap-8">
+                    <li><a href="index.html" class="text-slate-600 hover:text-cejam-teal font-medium transition-colors">Início</a></li>
+                    <li><a href="acreditacao.html" class="text-slate-600 hover:text-cejam-teal font-medium transition-colors">Acreditação TI</a></li>
+                    <li><a href="equipe.html" class="text-slate-600 hover:text-cejam-teal font-medium transition-colors">Sobre o Time</a></li>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow pb-20">
+        
+        <div class="bg-white border-b border-slate-200 py-12">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-slate-800 tracking-tight">Catálogo de Sistemas</h1>
+                    <p class="mt-2 text-slate-500">Acesso rápido às ferramentas administrativas e assistenciais.</p>
+                </div>
+                
+                <div class="flex bg-slate-100 p-1 rounded-lg">
+                    <button class="px-4 py-2 bg-white shadow-sm rounded-md text-sm font-bold text-slate-800">Todos</button>
+                    <button class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-cejam-teal">Clínicos</button>
+                    <button class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-cejam-teal">Admin</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 mt-12">
+
+            <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-heartbeat text-cejam-teal"></i> Assistencial
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative">
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5" title="Sistema Online">
+                        <span class="relative flex h-2.5 w-2.5">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        <span class="text-[10px] font-bold text-green-600 uppercase">Online</span>
+                    </div>
+
+                    <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center text-green-600 text-2xl mb-4 group-hover:bg-green-100 transition-colors">
+                        <i class="fas fa-notes-medical"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">MV Soul</h3>
+                    <p class="text-sm text-slate-500 mb-6">Prontuário eletrônico do paciente e gestão hospitalar.</p>
+                    <a href="#" class="block w-full py-2.5 rounded-lg bg-slate-50 text-slate-600 font-semibold text-center text-sm border border-slate-200 hover:bg-cejam-teal hover:text-white hover:border-cejam-teal transition-all">
+                        Acessar Sistema
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative">
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5" title="Instabilidade">
+                        <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+                        <span class="text-[10px] font-bold text-yellow-600 uppercase">Lento</span>
+                    </div>
+
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:bg-blue-100 transition-colors">
+                        <i class="fas fa-x-ray"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">PACS Imagens</h3>
+                    <p class="text-sm text-slate-500 mb-6">Visualização de exames de Raio-X e Tomografia.</p>
+                    <a href="#" class="block w-full py-2.5 rounded-lg bg-slate-50 text-slate-600 font-semibold text-center text-sm border border-slate-200 hover:bg-cejam-teal hover:text-white hover:border-cejam-teal transition-all">
+                        Acessar Sistema
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative">
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5">
+                        <span class="h-2.5 w-2.5 rounded-full bg-green-500"></span>
+                        <span class="text-[10px] font-bold text-green-600 uppercase">Online</span>
+                    </div>
+
+                    <div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-4 group-hover:bg-purple-100 transition-colors">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">Telemedicina</h3>
+                    <p class="text-sm text-slate-500 mb-6">Plataforma de consultas remotas e laudos.</p>
+                    <a href="#" class="block w-full py-2.5 rounded-lg bg-slate-50 text-slate-600 font-semibold text-center text-sm border border-slate-200 hover:bg-cejam-teal hover:text-white hover:border-cejam-teal transition-all">
+                        Acessar Sistema
+                    </a>
+                </div>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-briefcase text-cejam-blue"></i> Administrativo & Infra
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative">
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5">
+                        <span class="h-2.5 w-2.5 rounded-full bg-green-500"></span>
+                        <span class="text-[10px] font-bold text-green-600 uppercase">Online</span>
+                    </div>
+
+                    <div class="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 text-2xl mb-4 group-hover:bg-slate-200 transition-colors">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">ERP Financeiro</h3>
+                    <p class="text-sm text-slate-500 mb-6">Gestão financeira, compras e suprimentos.</p>
+                    <a href="#" class="block w-full py-2.5 rounded-lg bg-slate-50 text-slate-600 font-semibold text-center text-sm border border-slate-200 hover:bg-cejam-blue hover:text-white hover:border-cejam-blue transition-all">
+                        Acessar Sistema
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative">
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5">
+                        <span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                        <span class="text-[10px] font-bold text-red-600 uppercase">Offline</span>
+                    </div>
+
+                    <div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600 text-2xl mb-4 group-hover:bg-orange-100 transition-colors">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">Helpdesk TI</h3>
+                    <p class="text-sm text-slate-500 mb-6">Abertura de chamados técnicos e suporte.</p>
+                    <button disabled class="block w-full py-2.5 rounded-lg bg-slate-100 text-slate-400 font-semibold text-center text-sm cursor-not-allowed">
+                        Indisponível
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative">
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5">
+                        <span class="h-2.5 w-2.5 rounded-full bg-green-500"></span>
+                        <span class="text-[10px] font-bold text-green-600 uppercase">Online</span>
+                    </div>
+
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:bg-blue-100 transition-colors">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">Webmail</h3>
+                    <p class="text-sm text-slate-500 mb-6">Acesso ao e-mail corporativo Outlook.</p>
+                    <a href="#" class="block w-full py-2.5 rounded-lg bg-slate-50 text-slate-600 font-semibold text-center text-sm border border-slate-200 hover:bg-cejam-blue hover:text-white hover:border-cejam-blue transition-all">
+                        Acessar Sistema
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 relative z-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-cejam-teal rounded flex items-center justify-center text-white font-bold text-xs">
+                            C
+                        </div>
+                        <span class="text-xl font-bold text-white tracking-tight">CEJAM Tech</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Transformando a saúde através da tecnologia. Inovação contínua para melhor atender nossos pacientes e colaboradores.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Fale Conosco</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-cejam-teal mt-1"></i>
+                            <span>Rua Dr. Lund, 41 - Liberdade<br>São Paulo - SP</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-cejam-teal"></i>
+                            <span>it@cejam.org.br</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-cejam-teal"></i>
+                            <span>(11) 3469-1800</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Conecte-se</h3>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#E4405F] hover:text-white transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FF0000] hover:text-white transition-all duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 CEJAM - Centro de Estudos e Pesquisas "Dr. João Amorim".</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-cejam-teal transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-cejam-teal transition-colors">Termos de Uso</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>    
+
+</body>
+</html>

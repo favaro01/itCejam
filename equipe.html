@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre o Time</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cejam: {
+                            blue: '#0056b3', // Ajuste conforme a cor oficial
+                            teal: '#14b8a6', // A cor 'tech' usada no exemplo
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-cejam-teal rounded-lg flex items-center justify-center text-white font-bold">
+                    C
+                </div>
+                <h1 class="text-2xl font-bold text-slate-800 tracking-tight">
+                    CEJAM <span class="text-cejam-teal font-light">Tech</span>
+                </h1>
+            </div>
+
+            <nav>
+                <ul class="flex items-center gap-8">
+                    <li><a href="index.html" class="text-slate-600 hover:text-cejam-teal font-medium transition-colors">Início</a></li>
+                    <li><a href="acreditacao.html" class="text-slate-600 hover:text-cejam-teal font-medium transition-colors">Acreditação TI</a></li>
+                    <li><a href="equipe.html" class="text-slate-600 hover:text-cejam-teal font-medium transition-colors">Sobre o Time</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+    <main class="bg-slate-50 min-h-screen pb-20">
+    
+        <div class="bg-white border-b border-slate-200 py-12">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <span class="text-cejam-teal font-bold text-sm uppercase tracking-wider mb-2 block">Gestão & Cultura</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-800 tracking-tight">
+                    Sobre o Time
+                </h1>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 mt-12 space-y-20">
+
+            <section class="flex flex-col md:flex-row items-center gap-10 bg-white p-8 md:p-12 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
+                
+                <div class="relative flex-shrink-0">
+                    <div class="absolute inset-0 bg-cejam-teal blur-lg opacity-20 rounded-full transform translate-y-4"></div>
+                    <img src="https://ui-avatars.com/api/?name=Rodrigo+Miranda&background=0D8ABC&color=fff&size=200" alt="Rodrigo Miranda" class="relative w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-white shadow-md">
+                </div>
+
+                <div class="text-center md:text-left">
+                    <i class="fas fa-quote-left text-4xl text-cejam-blue opacity-20 mb-4 block"></i>
+                    <p class="text-lg md:text-xl text-slate-600 italic leading-relaxed font-medium">
+                        "A Transformação Digital é essencial para aprimorar a experiência do paciente e melhorar resultados clínicos na área da saúde. É uma jornada contínua que exige compromisso da liderança e da equipe para oferecer um cuidado de qualidade."
+                    </p>
+                    <div class="mt-6">
+                        <h3 class="text-xl font-bold text-slate-800">Rodrigo Miranda</h3>
+                        <p class="text-cejam-teal font-semibold">Gerente de Inovação e Tecnologia</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-800 mb-8 border-l-4 border-cejam-blue pl-4">Liderança</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-cejam-teal transition-colors group flex items-center gap-6 shadow-sm">
+                        <img src="https://ui-avatars.com/api/?name=Rodrigo+Silva&background=0D8ABC&color=fff&size=80" alt="Coordenador" class="w-20 h-20 rounded-full object-cover border-2 border-slate-100 group-hover:scale-105 transition-transform">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Coord. Sustentação</h3>
+                            <p class="text-sm text-slate-500">Infraestrutura e Redes</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-cejam-teal transition-colors group flex items-center gap-6 shadow-sm">
+                        <img src="https://ui-avatars.com/api/?name=Marcel+Leme&background=0D8ABC&color=fff&size=80" alt="Coordenador" class="w-20 h-20 rounded-full object-cover border-2 border-slate-100 group-hover:scale-105 transition-transform">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Coord. Sistemas</h3>
+                            <p class="text-sm text-slate-500">Desenvolvimento e Inovação</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                
+                <div class="order-2 md:order-1">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <i class="fas fa-chess-knight text-cejam-teal"></i> Metodologia Ágil
+                    </h2>
+                    <div class="prose text-slate-600 leading-relaxed space-y-4">
+                        <p>
+                            O departamento utiliza um modelo híbrido, unindo a robustez da <strong>Gestão de Projetos PMI</strong> com a flexibilidade das <strong>Metodologias Ágeis</strong> (Scrum/Kanban).
+                        </p>
+                        <p>
+                            Assim, planejamos e executamos eficientemente, assegurando metas e orçamentos, enquanto promovemos adaptação rápida e colaboração contínua.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="order-1 md:order-2 bg-gradient-to-br from-slate-100 to-white p-8 rounded-2xl border border-slate-200 text-center">
+                    <i class="fas fa-layer-group text-6xl text-cejam-blue mb-4 opacity-50"></i>
+                    <h3 class="text-lg font-bold text-slate-700">Expertise Técnica</h3>
+                    <p class="text-xs text-slate-400 mt-2">Arquitetura • Cloud • Dados</p>
+                </div>
+            </section>
+
+            <section class="bg-cejam-blue rounded-3xl p-8 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mr-10 -mt-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+
+                <div class="relative z-10 max-w-2xl">
+                    <h2 class="text-2xl font-bold text-white mb-4">Regionais de TI</h2>
+                    <p class="text-blue-100 leading-relaxed mb-6">
+                        Realizamos encontros semanais para acompanhamento de projetos, compartilhamento de novas tecnologias e diretrizes de segurança da informação.
+                    </p>
+                    <div class="flex items-center gap-4 text-sm text-blue-200">
+                        <span><i class="fas fa-check-circle mr-1"></i> Tomada de decisão</span>
+                        <span><i class="fas fa-check-circle mr-1"></i> Estratégia</span>
+                    </div>
+                </div>
+
+                <a href="#" class="relative z-10 bg-white text-cejam-blue hover:bg-teal-50 font-bold py-4 px-8 rounded-xl shadow-lg transition-transform hover:scale-105 inline-flex items-center gap-2">
+                    Ver Projeto Regionais
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </section>
+
+            <section class="py-12 bg-slate-50 overflow-x-auto" id="structure">
+                    <div class="max-w-4xl mx-auto px-6 text-center">
+                        <span class="text-cejam-teal font-bold text-sm uppercase tracking-wider mb-2 block">Gestão & Cultura</span>
+                        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-800 tracking-tight">
+                            Nossa Estrutura
+                        </h1>
+                        <p class="mt-4 text-slate-500">Navegue pela equipe clicando nos cartões para ver os detalhes de cada área.</p>
+                    </div>
+
+                <div class="max-w-5xl mx-auto px-6 mt-8">
+                    
+                    <div id="breadcrumbs" class="flex items-center gap-2 text-sm text-slate-500 mb-6 min-h-[24px]">
+                        </div>
+
+                    <div id="dynamic-view" class="animate-fade-in">
+                        </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 relative z-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-cejam-teal rounded flex items-center justify-center text-white font-bold text-xs">
+                            C
+                        </div>
+                        <span class="text-xl font-bold text-white tracking-tight">CEJAM Tech</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Transformando a saúde através da tecnologia. Inovação contínua para melhor atender nossos pacientes e colaboradores.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Fale Conosco</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-cejam-teal mt-1"></i>
+                            <span>Rua Dr. Lund, 41 - Liberdade<br>São Paulo - SP</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-cejam-teal"></i>
+                            <span>it@cejam.org.br</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-cejam-teal"></i>
+                            <span>(11) 3469-1800</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Conecte-se</h3>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#E4405F] hover:text-white transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FF0000] hover:text-white transition-all duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 CEJAM - Centro de Estudos e Pesquisas "Dr. João Amorim".</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-cejam-teal transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-cejam-teal transition-colors">Termos de Uso</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    
+    <script>
+        // 1. DADOS HIERÁRQUICOS (ADICIONEI MAIS NÍVEIS PARA TESTAR)
+        const orgData = {
+            id: 1,
+            name: "Rodrigo Miranda",
+            role: "Gerente de Inovação e Tecnologia",
+            photo: "https://ui-avatars.com/api/?name=Rodrigo+Miranda&background=0D8ABC&color=fff&size=200",
+            quote: "A Transformação Digital é uma jornada contínua que exige compromisso da liderança.",
+            bgGradient: "from-blue-600 to-cejam-blue",
+            children: [
+                {
+                    id: 2,
+                    name: "Rodrigo Silva",
+                    role: "Coord. Infraestrutura",
+                    photo: "https://ui-avatars.com/api/?name=Rodrigo+Silva&background=14b8a6&color=fff",
+                    bgGradient: "from-teal-500 to-emerald-600",
+                    children: [
+                        { id: 21, name: "Bryan Nakasato", role: "Analista de Infraestrutura", photo: "", bgGradient: "from-slate-400 to-slate-500" },
+                        { id: 22, name: "Vinicius Gomes", role: "Analista de Infraestrutura", photo: "", bgGradient: "from-slate-400 to-slate-500" },
+                        { id: 23, name: "Equipe de Suporte", role: "Suporte Técnico", photo: "", bgGradient: "from-slate-400 to-slate-500", 
+                          children: [ // Nível 4 de profundidade
+                              { id: 231, name: "Willian Reis", role: "Técnico de Suporte", bgGradient: "from-gray-400 to-gray-500" },
+                              { id: 232, name: "Lucas Tomé", role: "Técnico de Suporte", bgGradient: "from-gray-400 to-gray-500" }
+                          ]
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: "Marcel Leme",
+                    role: "Coord. Sistemas",
+                    photo: "https://ui-avatars.com/api/?name=Marcel+Leme&background=6366f1&color=fff",
+                    bgGradient: "from-indigo-500 to-purple-600",
+                    children: [
+                        { id: 31, name: "Natan Dourado", role: "Developer", bgGradient: "from-slate-400 to-slate-500" },
+                        { id: 32, name: "Lucas Martins", role: "Mobile Developer", bgGradient: "from-slate-400 to-slate-500" }
+                    ]
+                },
+                {
+                    id: 4,
+                    name: "Jefferson Nascimento",
+                    role: "Equipe Protheus",
+                    photo: "https://ui-avatars.com/api/?name=Jefferson+Nascimento&background=db2777&color=fff",
+                    bgGradient: "from-pink-600 to-rose-600",
+                    children: [
+                        { id: 41, name: "Andréa", role: "Equipe Protheus", bgGradient: "from-slate-400 to-slate-500" },
+                        { id: 42, name: "Amanda", role: "Equipe Protheus", bgGradient: "from-slate-400 to-slate-500" }
+                    ]
+                }
+            ]
+        };
+
+        // 2. ESTADO DA APLICAÇÃO
+        let currentViewNode = orgData; // Começa no topo (Rodrigo)
+        let navigationHistory = []; // Pilha para saber como voltar
+
+        // 3. FUNÇÃO PRINCIPAL DE RENDERIZAÇÃO
+        function render() {
+            const container = document.getElementById('dynamic-view');
+            const breadcrumbsContainer = document.getElementById('breadcrumbs');
+            
+            // Limpa a tela
+            container.innerHTML = '';
+            
+            // --- A. RENDERIZA BREADCRUMBS (Trilha) ---
+            let breadcrumbHTML = `<span class="cursor-pointer hover:text-cejam-teal font-bold" onclick="resetView()">Início</span>`;
+            navigationHistory.forEach((node, index) => {
+                breadcrumbHTML += ` <i class="fas fa-chevron-right text-xs mx-1"></i> <span class="cursor-pointer hover:text-cejam-teal" onclick="goBackTo(${index})">${node.name}</span>`;
+            });
+            // Adiciona o atual (sem link)
+            breadcrumbHTML += ` <i class="fas fa-chevron-right text-xs mx-1"></i> <span class="text-slate-800 font-bold">${currentViewNode.name}</span>`;
+            breadcrumbsContainer.innerHTML = breadcrumbHTML;
+
+
+            // --- B. RENDERIZA O CARD GRANDE (Líder em Foco) ---
+            const heroSection = document.createElement('section');
+            heroSection.className = "flex flex-col md:flex-row items-center gap-8 bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100 mb-12 animate-fade-in relative overflow-hidden";
+            
+            // Se tiver histórico, mostra botão voltar flutuante
+            const backButtonHTML = navigationHistory.length > 0 
+                ? `<button onclick="goBack()" class="absolute top-4 left-4 text-slate-400 hover:text-cejam-teal transition-colors flex items-center gap-1 text-sm font-bold"><i class="fas fa-arrow-left"></i> Voltar</button>` 
+                : '';
+
+            const imageSrc = currentViewNode.photo ? currentViewNode.photo : `https://ui-avatars.com/api/?name=${currentViewNode.name}&background=random`;
+            const quoteHTML = currentViewNode.quote 
+                ? `<div class="mb-4"><i class="fas fa-quote-left text-3xl text-cejam-blue opacity-20 mb-2 block"></i><p class="text-lg text-slate-600 italic font-medium">"${currentViewNode.quote}"</p></div>` 
+                : '';
+
+            heroSection.innerHTML = `
+                ${backButtonHTML}
+                <div class="relative flex-shrink-0 mt-6 md:mt-0">
+                    <div class="absolute inset-0 bg-gradient-to-br ${currentViewNode.bgGradient} blur-lg opacity-30 rounded-full transform translate-y-2"></div>
+                    <img src="${imageSrc}" class="relative w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-white shadow-md">
+                </div>
+                <div class="text-center md:text-left flex-1">
+                    ${quoteHTML}
+                    <h2 class="text-3xl font-extrabold text-slate-800">${currentViewNode.name}</h2>
+                    <p class="text-cejam-teal font-bold text-lg mb-4">${currentViewNode.role}</p>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs text-slate-500 font-mono">
+                        <i class="fas fa-users"></i> ${currentViewNode.children ? currentViewNode.children.length : 0} Liderados diretos
+                    </div>
+                </div>
+            `;
+            container.appendChild(heroSection);
+
+
+            // --- C. RENDERIZA A EQUIPE (Grid de Cards Pequenos) ---
+            if (currentViewNode.children && currentViewNode.children.length > 0) {
+                
+                const gridTitle = document.createElement('h3');
+                gridTitle.className = "text-xl font-bold text-slate-800 mb-6 pl-4 border-l-4 border-cejam-teal";
+                gridTitle.innerText = `Equipe de ${currentViewNode.name.split(' ')[0]}`; // Pega só o primeiro nome
+                container.appendChild(gridTitle);
+
+                const grid = document.createElement('div');
+                grid.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6";
+
+                currentViewNode.children.forEach(child => {
+                    const card = document.createElement('div');
+                    // Card Interativo
+                    card.className = "bg-white p-6 rounded-2xl border border-slate-200 hover:border-cejam-teal hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer group flex items-center gap-4";
+                    
+                    const childImg = child.photo ? child.photo : `https://ui-avatars.com/api/?name=${child.name}&background=random`;
+                    // Verifica se esse filho tem sub-equipe para mostrar ícone indicativo
+                    const hasSubTeam = child.children && child.children.length > 0;
+                    const subTeamBadge = hasSubTeam ? `<div class="absolute top-4 right-4 text-cejam-teal text-xs"><i class="fas fa-plus-circle"></i></div>` : '';
+
+                    card.innerHTML = `
+                        ${subTeamBadge}
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br ${child.bgGradient || 'from-slate-400 to-slate-500'} p-0.5 flex-shrink-0">
+                            <img src="${childImg}" class="w-full h-full rounded-full object-cover border-2 border-white">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 group-hover:text-cejam-teal transition-colors">${child.name}</h4>
+                            <p class="text-xs text-slate-500">${child.role}</p>
+                            ${hasSubTeam ? '<p class="text-[10px] text-cejam-blue mt-1 font-bold">Ver Equipe →</p>' : ''}
+                        </div>
+                    `;
+
+                    // CLICK: Entrar no nível deste filho
+                    card.onclick = () => drillDown(child);
+                    grid.appendChild(card);
+                });
+
+                container.appendChild(grid);
+            } else {
+                // Caso não tenha equipe abaixo
+                const emptyState = document.createElement('div');
+                emptyState.className = "text-center py-10 opacity-50";
+                emptyState.innerHTML = `<i class="fas fa-user-tag text-4xl mb-2"></i><p>Fim da estrutura hierárquica.</p>`;
+                container.appendChild(emptyState);
+            }
+        }
+
+        // 4. FUNÇÕES DE NAVEGAÇÃO
+        function drillDown(node) {
+            // Salva quem estamos vendo agora no histórico antes de mudar
+            navigationHistory.push(currentViewNode);
+            // Muda a visão para o novo nó clicado
+            currentViewNode = node;
+            render();
+            document.getElementById("structure").scrollIntoView({ behavior: "smooth"});
+        }
+
+        function goBack() {
+            if (navigationHistory.length > 0) {
+                // Tira o último do histórico e define como atual
+                currentViewNode = navigationHistory.pop();
+                render();
+                document.getElementById("structure").scrollIntoView({ behavior: "smooth"});
+            }
+        }
+
+        function resetView() {
+            navigationHistory = [];
+            currentViewNode = orgData;
+            render();
+            document.getElementById("structure").scrollIntoView({ behavior: "smooth"});
+        }
+
+        // Permite clicar no breadcrumb para voltar níveis específicos
+        function goBackTo(index) {
+            // Se clicar no index 0 (primeiro item), queremos manter só o root.
+            // Corta o histórico até aquele ponto
+            // Ajuste simples: Resetar é mais seguro ou reconstruir a lógica de slice
+            currentViewNode = navigationHistory[index];
+            navigationHistory = navigationHistory.slice(0, index);
+            render();
+            document.getElementById("structure").scrollIntoView({ behavior: "smooth"}); 
+        }
+
+        // INICIALIZA
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+        });
+
+    </script>
+</body>
+</html>
