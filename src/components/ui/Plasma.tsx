@@ -166,6 +166,10 @@ const Plasma: React.FC<PlasmaProps> = ({
       const width = Math.max(1, Math.floor(rect.width * RES_SCALE));
       const height = Math.max(1, Math.floor(rect.height * RES_SCALE));
       renderer.setSize(width, height);
+      // OGL's setSize overwrites canvas CSS dimensions with px values;
+      // restore 100% so the low-res buffer stretches to fill the container.
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
       const res = program.uniforms.iResolution.value as Float32Array;
       res[0] = gl.drawingBufferWidth;
       res[1] = gl.drawingBufferHeight;
@@ -215,7 +219,7 @@ const Plasma: React.FC<PlasmaProps> = ({
     };
   }, [color, speed, direction, scale, opacity, mouseInteractive]);
 
-  return <div ref={containerRef} className="w-full h-full relative overflow-hidden" />;
+  return <div ref={containerRef} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }} />;
 };
 
 export default Plasma;
