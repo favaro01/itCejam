@@ -8,11 +8,10 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-linear-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:scale-[1.02] active:scale-[0.98]",
+    "bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:scale-[1.02] active:scale-[0.98]",
   secondary:
     "glass text-slate-200 px-6 py-3 hover:border-blue-500/50 hover:text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.1)]",
-  ghost:
-    "text-slate-400 px-4 py-2 hover:text-white hover:bg-slate-800/50",
+  ghost: "text-slate-400 px-4 py-2 hover:text-white hover:bg-slate-800/50",
 };
 
 /* ── Props ─────────────────────────────────────────────────────────── */

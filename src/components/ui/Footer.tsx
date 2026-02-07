@@ -16,7 +16,12 @@ const footerLinks = [
   },
   {
     title: "Recursos",
-    links: ["Documentação", "Status dos Sistemas", "Base de Conhecimento", "Políticas de TI"],
+    links: [
+      "Documentação",
+      "Status dos Sistemas",
+      "Base de Conhecimento",
+      "Políticas de TI",
+    ],
   },
 ];
 
@@ -33,7 +38,7 @@ export default function Footer() {
           {/* Brand column */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-cyan-400">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400">
                 <span className="text-sm font-bold text-white">TI</span>
               </div>
               <div>
@@ -66,9 +71,7 @@ export default function Footer() {
           {/* Link columns */}
           {footerLinks.map(({ title, links }) => (
             <div key={title}>
-              <h4 className="mb-4 text-sm font-semibold text-white">
-                {title}
-              </h4>
+              <h4 className="mb-4 text-sm font-semibold text-white">{title}</h4>
               <ul className="flex flex-col gap-2">
                 {links.map((link) => (
                   <li key={link}>

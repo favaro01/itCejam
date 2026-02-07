@@ -1,9 +1,23 @@
 @import "tailwindcss";
 
-/* ── Design Tokens via Tailwind v4 @theme ──────────────────────────── */
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+
+@font-face {
+  font-family: "Flexo";
+  src: url("./assets/fonts/Flexo-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ── Design Tokens via CSS Variables ───────────────────────────────── */
+:root {
+  --font-display: "Lato", "Inter", sans-serif;
+  --font-body: "Verdana", "Geneva", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-logo: "Flexo", sans-serif;
+
+  --color-cejam-blue: #162647;
+  --color-cejam-cyan: #00adb8;
 
   --color-surface: oklch(0.21 0.02 264 / 0.5);
   --color-surface-border: oklch(0.32 0.02 264);
@@ -19,13 +33,23 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  padding: 0;
+  font-family: var(--font-body);
   background-color: #020617;
   color: #e2e8f0;
+  width: 100%;
+  overflow-x: clip;
+}
+
+#root {
+  width: 100%;
+  overflow-x: clip;
 }
 
 /* ── Custom utility classes ────────────────────────────────────────── */
@@ -51,18 +75,21 @@ body {
 }
 
 .glow-blue {
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.15),
-              0 0 80px rgba(59, 130, 246, 0.05);
+  box-shadow:
+    0 0 40px rgba(59, 130, 246, 0.15),
+    0 0 80px rgba(59, 130, 246, 0.05);
 }
 
 .glow-violet {
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.15),
-              0 0 80px rgba(139, 92, 246, 0.05);
+  box-shadow:
+    0 0 40px rgba(139, 92, 246, 0.15),
+    0 0 80px rgba(139, 92, 246, 0.05);
 }
 
 .glow-cyan {
-  box-shadow: 0 0 40px rgba(34, 211, 238, 0.15),
-              0 0 80px rgba(34, 211, 238, 0.05);
+  box-shadow:
+    0 0 40px rgba(34, 211, 238, 0.15),
+    0 0 80px rgba(34, 211, 238, 0.05);
 }
 
 /* ── Animated gradient border ──────────────────────────────────────── */
@@ -91,18 +118,32 @@ body {
 
 /* ── Keyframes ─────────────────────────────────────────────────────── */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes grid-scroll {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(40px); }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(40px);
+  }
 }
 
 /* ── React Flow overrides ──────────────────────────────────────────── */

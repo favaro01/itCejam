@@ -32,37 +32,41 @@ export default function Hero() {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(".hero-tag", { y: 30, opacity: 0, duration: 0.6 })
-        .from(".hero-title span", {
-          y: 60,
-          opacity: 0,
-          stagger: 0.12,
-          duration: 0.8,
-        })
-        .from(".hero-desc", { y: 30, opacity: 0, duration: 0.6 }, "-=0.3")
-        .from(".hero-cta > *", {
-          y: 20,
-          opacity: 0,
-          stagger: 0.1,
-          duration: 0.5,
-        }, "-=0.2")
-        .from(
+      tl.fromTo(
+        ".hero-title span",
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.12, duration: 0.8 },
+      )
+        .fromTo(
+          ".hero-desc",
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          "-=0.3",
+        )
+        .fromTo(
+          ".hero-cta > *",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.1, duration: 0.5 },
+          "-=0.2",
+        )
+        .fromTo(
           ".floating-badge",
+          { scale: 0, opacity: 0 },
           {
-            scale: 0,
-            opacity: 0,
+            scale: 1,
+            opacity: 1,
             stagger: 0.15,
             duration: 0.6,
             ease: "back.out(1.7)",
           },
-          "-=0.4"
+          "-=0.4",
         )
-        .from(".hero-grid-line", {
-          scaleY: 0,
-          opacity: 0,
-          stagger: 0.05,
-          duration: 0.5,
-        }, "-=0.6");
+        .fromTo(
+          ".hero-grid-line",
+          { scaleY: 0, opacity: 0 },
+          { scaleY: 1, opacity: 1, stagger: 0.05, duration: 0.5 },
+          "-=0.6",
+        );
 
       // Floating animation for badges
       gsap.to(".floating-badge", {
@@ -74,7 +78,7 @@ export default function Hero() {
         stagger: 0.3,
       });
     },
-    { scope: container }
+    { scope: container },
   );
 
   return (
@@ -87,14 +91,14 @@ export default function Hero() {
         {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
-            className="hero-grid-line absolute top-0 h-full w-px bg-linear-to-b from-transparent via-blue-500 to-transparent"
+            className="hero-grid-line absolute top-0 h-full w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent"
             style={{ left: `${(i + 1) * 10}%` }}
           />
         ))}
         {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={`h-${i}`}
-            className="hero-grid-line absolute left-0 h-px w-full bg-linear-to-r from-transparent via-blue-500 to-transparent"
+            className="hero-grid-line absolute left-0 h-px w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"
             style={{ top: `${(i + 1) * 16}%` }}
           />
         ))}
@@ -109,31 +113,47 @@ export default function Hero() {
       </div>
 
       {/* ── Floating badges ────────────────────────────────────────── */}
-      <FloatingBadge icon={Cpu} label="Infrastructure" className="left-[8%] top-[22%]" />
-      <FloatingBadge icon={Shield} label="Cybersecurity" className="right-[10%] top-[18%]" />
-      <FloatingBadge icon={BarChart3} label="Analytics" className="left-[12%] bottom-[28%]" />
+      {/* <FloatingBadge
+        icon={Cpu}
+        label="Infraestrutura"
+        className="left-[8%] top-[22%]"
+      />
+      <FloatingBadge
+        icon={Shield}
+        label="Cibersegurança"
+        className="left-[10%] top-[40%]"
+      />
+      <FloatingBadge
+        icon={BarChart3}
+        label="Dados & Insights"
+        className="left-[12%] bottom-[28%]"
+      /> */}
 
       {/* ── Content ────────────────────────────────────────────────── */}
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
-
-        <h1 className="hero-title mb-6 text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-          <span className="block">Transformamos</span>
-          <span className="text-gradient block">Infraestrutura</span>
-          <span className="block">em Inovação</span>
+      <div className="relative z-20 mx-auto max-w-4xl text-center flex flex-col items-center">
+        <h1 className="font-display hero-title mb-6 text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+          <span className="block">Processando</span>
+          <span className="block">o Futuro da</span>
+          <span className="text-gradient block">Saúde Pública</span>
         </h1>
 
-        <p className="hero-desc mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-400">
-          Construímos e mantemos a espinha digital que conecta mais de{" "}
-          <span className="font-semibold text-slate-200">100 unidades de saúde</span>,
-          garantindo tecnologia de ponta, segurança e eficiência para quem mais precisa.
-        </p>
+        {/* <p className="font-body hero-desc mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-400">
+          Mais que gestão, somos a inteligência por trás de{" "}
+          <span className="font-semibold text-slate-200">
+            3.8 milhões de consultas/ano
+          </span>
+          . Conectamos{" "}
+          <span className="font-semibold text-slate-200">
+            23.000 profissionais
+          </span>{" "}
+          transformando dados brutos em bem-estar real para quem mais precisa.
+        </p> */}
 
         <div className="hero-cta flex flex-wrap items-center justify-center gap-4">
           <Button variant="primary">
-            Conheça nossa stack
+            Conheça nossa equipe
             <ChevronDown className="h-4 w-4" />
           </Button>
-          <Button variant="secondary">Fale com o time</Button>
         </div>
       </div>
 
@@ -141,9 +161,9 @@ export default function Hero() {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <div className="flex flex-col items-center gap-2 text-slate-600">
           <span className="text-xs font-medium uppercase tracking-widest">
-            Scroll
+            Role para saber mais
           </span>
-          <div className="h-8 w-px animate-pulse bg-linear-to-b from-slate-600 to-transparent" />
+          <div className="h-8 w-px animate-pulse bg-gradient-to-b from-slate-600 to-transparent" />
         </div>
       </div>
     </section>

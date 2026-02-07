@@ -1,50 +1,40 @@
-import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 import Plasma from "./components/ui/Plasma";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Values from "./components/Values";
-import Products from "./components/Products";
-import Stats from "./components/Stats";
-import Awards from "./components/Awards";
-import Footer from "./components/Footer";
-
-// Lazy-load heavy React Flow chart (biggest JS bundle chunk)
-const OrgChartSection = lazy(() => import("./components/OrgChart/OrgChartSection"));
-
-function OrgChartFallback() {
-  return (
-    <div className="flex min-h-[400px] items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
-    </div>
-  );
-}
+import Navbar from "./components/ui/Navbar";
+import Footer from "./components/ui/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
+// import Units from "./pages/Units";
+// import Awards from "./pages/Awards";
+// import Team from "./pages/Team";
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-slate-950 font-sans text-slate-200 antialiased">
-      {/* ── Plasma WebGL background (full-site) ──────────────────── */}
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-60">
+    <div className="relative min-h-screen w-full bg-slate-950 font-sans text-slate-200 antialiased selection:bg-cejam-cyan selection:text-white">
+      <div className="fixed inset-0 z-0 w-full h-full opacity-60 pointer-events-none">
         <Plasma
-          color="#3b82f6"
-          speed={0.3}
+          color="#00adb8"
+          speed={1}
           direction="forward"
-          scale={1.5}
-          opacity={0.6}
+          scale={1}
+          opacity={1}
         />
       </div>
-
       <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Values />
-        <Products />
-        <Stats />
-        <Awards />
-        <Suspense fallback={<OrgChartFallback />}>
-          <OrgChartSection />
-        </Suspense>
+      <main className="relative z-10">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sobre" element={<About />} />
+          {/* <Route path="/unidades" element={<Units />} /> */}
+          {/* <Route path="/premios" element={<Awards />} /> */}
+          {/* <Route path="/time" element={<Team />} /> */}
+          <Route
+            path="*"
+            element={
+              <div className="pt-32 text-center">Página não encontrada</div>
+            }
+          />
+        </Routes>
       </main>
       <Footer />
     </div>
