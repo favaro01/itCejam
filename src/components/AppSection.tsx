@@ -9,7 +9,8 @@ const apps = [
     category: "INOVAÇÃO",
     description:
       "Sua copiloto digital no dia a dia. Atuando como auditora consultiva, ela eleva a barra da qualidade e revoluciona o suporte de TI: tire dúvidas técnicas e abra chamados complexos em segundos, conversando diretamente com nossa IA.",
-    image: "https://images.pexels.com/photos/6153344/pexels-photo-6153344.jpeg",
+    image:
+      "https://images.pexels.com/photos/6153344/pexels-photo-6153344.jpeg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-cejam-cyan to-blue-600",
     glow: "#00adb8",
     phone: "right", // celular na direita, texto na esquerda
@@ -20,7 +21,8 @@ const apps = [
     category: "SUPER APP",
     description:
       "O Hub definitivo do colaborador. Centraliza Dashboards, Paytrack e Comunicação Interna. O destaque é o 'Meu Lugar': a gestão inteligente do trabalho híbrido que permite reservar sua estação de trabalho presencial em tempo real.",
-    image: "https://images.pexels.com/photos/7651937/pexels-photo-7651937.jpeg",
+    image:
+      "https://images.pexels.com/photos/7651937/pexels-photo-7651937.jpeg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-violet-500 to-fuchsia-500",
     glow: "#8b5cf6",
     phone: "left", // celular na esquerda, texto na direita

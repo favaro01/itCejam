@@ -4,6 +4,7 @@ import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Apps from "./pages/Apps";
 // import Units from "./pages/Units";
 // import Awards from "./pages/Awards";
 // import Team from "./pages/Team";
@@ -28,6 +29,7 @@ export default function App() {
           {/* <Route path="/unidades" element={<Units />} /> */}
           {/* <Route path="/premios" element={<Awards />} /> */}
           {/* <Route path="/time" element={<Team />} /> */}
+          <Route path="/apps" element={<Apps />} />
           <Route
             path="*"
             element={
