@@ -25,7 +25,7 @@ export default function App() {
       <main className="relative z-10">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/sobre" element={<About />} />
+          <Route path="/about" element={<About />} />
           {/* <Route path="/unidades" element={<Units />} /> */}
           {/* <Route path="/premios" element={<Awards />} /> */}
           {/* <Route path="/time" element={<Team />} /> */}

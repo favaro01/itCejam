@@ -173,7 +173,7 @@ export default function OrgChartSection() {
       style: { stroke: "#3b82f6", strokeWidth: 2 },
       type: "smoothstep" as const,
     }),
-    []
+    [],
   );
 
   const onInit = useCallback(() => {
@@ -199,31 +199,36 @@ export default function OrgChartSection() {
         ease: "power3.out",
       });
     },
-    { scope: container }
+    { scope: container },
   );
 
   return (
-    <section ref={container} className="relative px-6 py-32" id="team">
+    <section
+      ref={container}
+      className="relative px-4 sm:px-6 py-16 sm:py-24 lg:py-32"
+      id="team"
+    >
       <div className="pointer-events-none absolute left-0 bottom-0">
         <div className="h-125 w-125 rounded-full bg-blue-500/5 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
         {/* ── Header ───────────────────────────────────────────── */}
-        <div className="org-header mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-400">
+        <div className="org-header mb-8 sm:mb-12 text-center">
+          <p className="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-blue-400">
             Organização
           </p>
-          <h2 className="mb-4 text-4xl font-bold text-white lg:text-5xl">
+          <h2 className="mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl font-bold text-white lg:text-5xl">
             Nosso <span className="text-gradient">Time</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-slate-400">
-            Estrutura organizacional que garante agilidade e especialização em cada frente tecnológica.
+          <p className="mx-auto max-w-2xl text-sm sm:text-base text-slate-400">
+            Estrutura organizacional que garante agilidade e especialização em
+            cada frente tecnológica.
           </p>
         </div>
 
         {/* ── Chart ────────────────────────────────────────────── */}
-        <div className="org-chart-wrapper glass overflow-hidden rounded-2xl" style={{ height: 560 }}>
+        <div className="org-chart-wrapper glass overflow-hidden rounded-xl sm:rounded-2xl h-[400px] sm:h-[480px] md:h-[560px]">
           <ReactFlow
             nodes={nodes}
             edges={edges}
@@ -243,10 +248,7 @@ export default function OrgChartSection() {
               size={1}
               color="rgba(148, 163, 184, 0.15)"
             />
-            <Controls
-              showInteractive={false}
-              position="bottom-right"
-            />
+            <Controls showInteractive={false} position="bottom-right" />
           </ReactFlow>
         </div>
       </div>

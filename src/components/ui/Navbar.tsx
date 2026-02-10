@@ -85,32 +85,27 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="glass mx-4 mt-2 rounded-xl p-4 md:hidden">
+        <div className="glass mx-2 sm:mx-4 mt-2 rounded-xl p-4 md:hidden">
           <ul className="flex flex-col gap-2">
             {links.map(({ label, href }) => (
               <li key={href}>
                 <Link
                   to={href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:bg-slate-800/50 hover:text-white"
+                  className="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 transition-colors hover:bg-slate-800/50 hover:text-white"
                 >
                   {label}
                 </Link>
               </li>
             ))}
             <li>
-              <button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                  document
-                    .getElementById("apps")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="mt-2 block w-full rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-center text-sm font-medium text-white"
+              <Link
+                to="apps"
+                onClick={() => setOpen(false)}
+                className="mt-2 block w-full rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2.5 text-center text-sm font-medium text-white"
               >
                 Aplicativos
-              </button>
+              </Link>
             </li>
           </ul>
         </div>

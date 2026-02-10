@@ -13,7 +13,10 @@ export interface OrgNodeData {
 function CustomNode({ data }: NodeProps) {
   const { label, role, department, color = "blue" } = data as OrgNodeData;
 
-  const colorMap: Record<string, { border: string; bg: string; text: string; dot: string }> = {
+  const colorMap: Record<
+    string,
+    { border: string; bg: string; text: string; dot: string }
+  > = {
     blue: {
       border: "border-blue-500/40",
       bg: "bg-blue-500/10",
@@ -63,8 +66,8 @@ function CustomNode({ data }: NodeProps) {
       />
       <div
         className={`
-          min-w-45 rounded-xl border ${c.border}
-          bg-slate-900/90 backdrop-blur-sm p-4
+          min-w-36 sm:min-w-45 rounded-lg sm:rounded-xl border ${c.border}
+          bg-slate-900/90 backdrop-blur-sm p-3 sm:p-4
           shadow-lg transition-all duration-300
           hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]
         `}
@@ -81,7 +84,9 @@ function CustomNode({ data }: NodeProps) {
         {/* Name */}
         <div className="flex items-center gap-2">
           <div className={`h-2 w-2 rounded-full ${c.dot}`} />
-          <span className="text-sm font-semibold text-white">{label as string}</span>
+          <span className="text-sm font-semibold text-white">
+            {label as string}
+          </span>
         </div>
 
         {/* Role */}

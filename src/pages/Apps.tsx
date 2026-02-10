@@ -52,7 +52,7 @@ export default function Apps() {
   return (
     <div className="relative bg-slate-950">
       {/* Hero Intro */}
-      <section className="relative h-screen flex flex-col items-center justify-center px-6">
+      <section className="relative h-screen flex flex-col items-center justify-center px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,11 +63,11 @@ export default function Apps() {
             Ecossistema Digital
           </span>
 
-          <h1 className="font-bold text-6xl sm:text-7xl lg:text-8xl text-white leading-tight">
+          <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white leading-tight">
             Nossos Aplicativos
           </h1>
 
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Tecnologia que transforma o dia a dia de colaboradores, gestores e
             pacientes.
           </p>
@@ -155,7 +155,7 @@ function AppSection({ app, index }: AppSectionProps) {
       {/* Content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full"
       >
         <div className="max-w-2xl space-y-8">
           {/* Number Badge */}
@@ -184,7 +184,7 @@ function AppSection({ app, index }: AppSectionProps) {
             transition={{ duration: 0.7, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-bold text-7xl sm:text-8xl lg:text-9xl text-white leading-none mb-4">
+            <h2 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-white leading-none mb-4">
               {app.name}
             </h2>
           </motion.div>
@@ -195,7 +195,7 @@ function AppSection({ app, index }: AppSectionProps) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-xl sm:text-2xl text-slate-300 leading-relaxed border-l-4 pl-6"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 leading-relaxed border-l-4 pl-4 sm:pl-6"
             style={{ borderColor: app.color }}
           >
             {app.description}
@@ -228,7 +228,7 @@ function AppSection({ app, index }: AppSectionProps) {
           >
             <button
               type="button"
-              className="group px-8 py-4 rounded-full border-2 text-white font-bold uppercase tracking-wider hover:bg-white hover:text-slate-950 transition-all duration-300"
+              className="group px-6 py-3 sm:px-8 sm:py-4 rounded-full border-2 text-white font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-white hover:text-slate-950 transition-all duration-300"
               style={{ borderColor: app.color }}
             >
               Saiba Mais
@@ -242,7 +242,7 @@ function AppSection({ app, index }: AppSectionProps) {
 
       {/* Glow Effect */}
       <div
-        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full blur-[120px] opacity-20 pointer-events-none"
+        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 lg:w-150 lg:h-150 rounded-full blur-[80px] sm:blur-[120px] opacity-20 pointer-events-none"
         style={{ backgroundColor: app.color }}
       ></div>
     </section>

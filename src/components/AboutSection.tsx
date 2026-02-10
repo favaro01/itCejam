@@ -82,7 +82,7 @@ const slideVariants = {
 function CardStack({ index, dir }: { index: number; dir: number }) {
   const card = cards[index];
   return (
-    <div className="relative h-[420px]">
+    <div className="relative h-[320px] sm:h-[380px] md:h-[420px]">
       <AnimatePresence initial={false} custom={dir} mode="wait">
         <motion.div
           key={index}
@@ -94,19 +94,21 @@ function CardStack({ index, dir }: { index: number; dir: number }) {
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
-          <div className="group relative overflow-hidden rounded-3xl bg-slate-900/50 border border-white/10 p-8 md:p-12 backdrop-blur-sm h-full hover:border-cyan-400/50 transition-colors duration-500">
+          <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900/50 border border-white/10 p-6 sm:p-8 md:p-12 backdrop-blur-sm h-full hover:border-cyan-400/50 transition-colors duration-500">
             <div className="absolute -right-20 -top-20 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] group-hover:bg-cyan-400/20 transition-all" />
 
-            <div className="text-cyan-400 text-4xl mb-6 bg-white/5 w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
+            <div className="text-cyan-400 text-3xl sm:text-4xl mb-4 sm:mb-6 bg-white/5 w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
               {card.icon}
             </div>
-            <h3 className="font-bold text-3xl text-white mb-4">{card.title}</h3>
-            <p className="text-slate-400 text-lg leading-relaxed mb-8">
+            <h3 className="font-bold text-xl sm:text-2xl md:text-3xl text-white mb-2 sm:mb-4">
+              {card.title}
+            </h3>
+            <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-8">
               {card.content}
             </p>
 
-            <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-              <span className="font-bold text-cyan-400 text-xl">
+            <div className="pt-4 sm:pt-6 border-t border-white/5 flex items-center justify-between">
+              <span className="font-bold text-cyan-400 text-base sm:text-xl">
                 {card.stats}
               </span>
               <span className="text-slate-600 text-sm font-mono">
@@ -133,7 +135,7 @@ export default function AboutSection() {
       style={{ height: `${cards.length * 150}vh` }}
     >
       <div className="sticky top-0 h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center w-full">
           {/* Lado esquerdo — fixo */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -141,10 +143,10 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-cyan-400 font-bold tracking-widest uppercase text-sm mb-4 block">
+            <span className="text-cyan-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2 sm:mb-4 block">
               Nossos Pilares
             </span>
-            <h2 className="font-bold text-4xl md:text-6xl text-white leading-tight mb-6">
+            <h2 className="font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-4 sm:mb-6">
               O{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
                 DNA
@@ -152,7 +154,7 @@ export default function AboutSection() {
               <br />
               da Inovação.
             </h2>
-            <p className="text-slate-400 text-lg max-w-md leading-relaxed mb-8">
+            <p className="text-slate-400 text-sm sm:text-base lg:text-lg max-w-md leading-relaxed mb-6 sm:mb-8">
               Mergulhe na nossa arquitetura. Aqui a tecnologia não é suporte, é
               estratégia vital.
             </p>

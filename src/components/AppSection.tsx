@@ -10,7 +10,7 @@ const apps = [
     description:
       "Sua copiloto digital no dia a dia. Atuando como auditora consultiva, ela eleva a barra da qualidade e revoluciona o suporte de TI: tire dúvidas técnicas e abra chamados complexos em segundos, conversando diretamente com nossa IA.",
     image:
-      "https://images.pexels.com/photos/6153344/pexels-photo-6153344.jpeg?auto=format&fit=crop&q=80&w=600",
+      "https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-cejam-cyan to-blue-600",
     glow: "#00adb8",
     phone: "right", // celular na direita, texto na esquerda
@@ -22,7 +22,7 @@ const apps = [
     description:
       "O Hub definitivo do colaborador. Centraliza Dashboards, Paytrack e Comunicação Interna. O destaque é o 'Meu Lugar': a gestão inteligente do trabalho híbrido que permite reservar sua estação de trabalho presencial em tempo real.",
     image:
-      "https://images.pexels.com/photos/7651937/pexels-photo-7651937.jpeg?auto=format&fit=crop&q=80&w=600",
+      "https://images.pexels.com/photos/7071/space-desk-office-workspace.jpg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-violet-500 to-fuchsia-500",
     glow: "#8b5cf6",
     phone: "left", // celular na esquerda, texto na direita
@@ -34,7 +34,7 @@ const apps = [
     description:
       "Autonomia total na jornada de trabalho. Integrado ao ecossistema TOTVS, permite o registro de ponto geolocalizado, gestão de férias e justificativas de atraso instantâneas. O RH burocrático ficou no passado.",
     image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
+      "https://images.pexels.com/photos/7875996/pexels-photo-7875996.jpeg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-emerald-400 to-green-600",
     glow: "#10b981",
     phone: "right", // celular na direita, texto na esquerda
@@ -118,11 +118,11 @@ function AppText({ index }: { index: number }) {
 function PhoneMockup({ index }: { index: number }) {
   const app = apps[index];
   return (
-    <div className="relative w-[220px] h-[440px] sm:w-[260px] sm:h-[520px] lg:w-[320px] lg:h-[640px] flex items-center">
+    <div className="relative w-[180px] h-[360px] sm:w-[220px] sm:h-[440px] md:w-[260px] md:h-[520px] lg:w-[320px] lg:h-[640px] flex items-center">
       {/* Mockup */}
-      <div className="w-[90%] h-[90%] bg-slate-950 border-[8px] border-slate-800 rounded-[3.5rem] shadow-2xl overflow-hidden ring-1 ring-white/10 relative">
+      <div className="w-[90%] h-[90%] bg-slate-950 border-[6px] sm:border-[8px] border-slate-800 rounded-[2.5rem] sm:rounded-[3.5rem] shadow-2xl overflow-hidden ring-1 ring-white/10 relative">
         {/* Notch */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-7 bg-slate-800 rounded-b-2xl z-20 flex justify-center items-center">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-36 h-5 sm:h-7 bg-slate-800 rounded-b-2xl z-20 flex justify-center items-center">
           <div className="w-12 h-1.5 bg-slate-900 rounded-full opacity-50" />
         </div>
 
@@ -145,7 +145,7 @@ function PhoneMockup({ index }: { index: number }) {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
 
           {/* Info na base */}
-          <div className="absolute bottom-10 left-8 right-8 z-20">
+          <div className="absolute bottom-6 left-4 right-4 sm:bottom-10 sm:left-8 sm:right-8 z-20">
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
@@ -154,7 +154,7 @@ function PhoneMockup({ index }: { index: number }) {
                 exit={{ y: -20, opacity: 0 }}
                 transition={{ delay: 0.15, duration: 0.4 }}
               >
-                <div className="text-white font-bold text-2xl mb-2">
+                <div className="text-white font-bold text-lg sm:text-2xl mb-2">
                   {app.title}
                 </div>
                 <div className="flex gap-2">
@@ -173,7 +173,7 @@ function PhoneMockup({ index }: { index: number }) {
       <motion.div
         animate={{ background: app.glow }}
         transition={{ duration: 0.8 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[150px] opacity-15 -z-10"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full blur-[100px] sm:blur-[150px] opacity-15 -z-10"
       />
     </div>
   );
@@ -194,12 +194,12 @@ export default function AppShowcase() {
       style={{ height: `${apps.length * 150}vh` }}
     >
       <div className="sticky top-8 h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full justify-center flex">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full justify-center flex flex-col items-center">
           {/* Mobile: empilhado | Desktop: lado a lado com layout animation */}
           <LayoutGroup>
             <motion.div
               layout
-              className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 ${
+              className={`flex flex-col items-center gap-6 sm:gap-8 lg:gap-16 lg:flex-row ${
                 phoneOnRight ? "" : "lg:flex-row-reverse"
               }`}
               transition={{
@@ -224,7 +224,7 @@ export default function AppShowcase() {
           </LayoutGroup>
 
           {/* Indicadores */}
-          <div className="flex justify-center gap-3">
+          <div className="flex justify-center gap-3 mt-6 lg:mt-0">
             {apps.map((a, i) => (
               <button
                 type="button"
