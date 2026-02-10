@@ -84,7 +84,7 @@ export default function Hero() {
   return (
     <section
       ref={container}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 sm:px-6"
     >
       {/* ── Background grid ────────────────────────────────────────── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.07]">
@@ -131,7 +131,7 @@ export default function Hero() {
 
       {/* ── Content ────────────────────────────────────────────────── */}
       <div className="relative z-20 mx-auto max-w-4xl text-center flex flex-col items-center">
-        <h1 className="font-display hero-title mb-6 text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+        <h1 className="font-display hero-title mb-4 sm:mb-6 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
           <span className="block">Processando</span>
           <span className="block">o Futuro da</span>
           <span className="text-gradient block">Saúde Pública</span>
@@ -158,9 +158,9 @@ export default function Hero() {
       </div>
 
       {/* ── Scroll indicator ───────────────────────────────────────── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2">
         <div className="flex flex-col items-center gap-2 text-slate-600">
-          <span className="text-xs font-medium uppercase tracking-widest">
+          <span className="text-[10px] sm:text-xs font-medium uppercase tracking-widest">
             Role para saber mais
           </span>
           <div className="h-8 w-px animate-pulse bg-gradient-to-b from-slate-600 to-transparent" />

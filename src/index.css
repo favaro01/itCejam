@@ -34,7 +34,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  overflow-x: clip;
 }
 
 body {
@@ -44,12 +43,11 @@ body {
   background-color: #020617;
   color: #e2e8f0;
   width: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 #root {
   width: 100%;
-  overflow-x: clip;
 }
 
 /* ── Custom utility classes ────────────────────────────────────────── */

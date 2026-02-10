@@ -27,14 +27,14 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-slate-800/50 px-6 pt-20 pb-10">
+    <footer className="relative border-t border-slate-800/50 px-4 sm:px-6 pt-12 sm:pt-20 pb-8 sm:pb-10">
       {/* Glow */}
       <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2">
         <div className="h-50 w-150 rounded-full bg-blue-500/5 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mb-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-8 sm:mb-12 grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
           <div>
             <div className="mb-4 flex items-center gap-2">
@@ -89,7 +89,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-slate-800/50 pt-8 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 sm:gap-4 border-t border-slate-800/50 pt-6 sm:pt-8 sm:flex-row">
           <p className="text-xs text-slate-600">
             © {new Date().getFullYear()} CEJAM — Departamento de Tecnologia.
             Todos os direitos reservados.

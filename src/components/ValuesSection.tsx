@@ -94,31 +94,36 @@ export default function Values() {
         ease: "power3.out",
       });
     },
-    { scope: container }
+    { scope: container },
   );
 
   return (
-    <section ref={container} className="relative px-6 py-32" id="values">
+    <section
+      ref={container}
+      className="relative px-4 sm:px-6 py-16 sm:py-24 lg:py-32"
+      id="values"
+    >
       <div className="pointer-events-none absolute right-0 top-0">
         <div className="h-125 w-125 rounded-full bg-violet-500/5 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-6xl">
         {/* ── Header ─────────────────────────────────────────────── */}
-        <div className="value-header mb-16 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-violet-400">
+        <div className="value-header mb-10 sm:mb-16 text-center">
+          <p className="mb-2 sm:mb-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-violet-400">
             Nossos Valores
           </p>
-          <h2 className="mb-4 text-4xl font-bold text-white lg:text-5xl">
+          <h2 className="mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl font-bold text-white lg:text-5xl">
             O que nos <span className="text-gradient-violet">move</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-slate-400">
-            Princípios que guiam cada decisão técnica e estratégica do departamento.
+          <p className="mx-auto max-w-2xl text-sm sm:text-base text-slate-400">
+            Princípios que guiam cada decisão técnica e estratégica do
+            departamento.
           </p>
         </div>
 
         {/* ── Grid ───────────────────────────────────────────────── */}
-        <div className="value-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="value-grid grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {values.map(({ icon: Icon, title, description, color, bg }) => (
             <Card key={title} className="value-card group" glow="none">
               <div
