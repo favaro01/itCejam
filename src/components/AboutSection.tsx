@@ -94,7 +94,7 @@ function CardStack({ index, dir }: { index: number; dir: number }) {
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
-          <div className="group relative overflow-hidden rounded-3xl bg-slate-900/50 border border-white/10 p-8 md:p-12 backdrop-blur-sm h-full hover:border-cyan-400/50 transition-colors duration-500">
+          <div className="group relative overflow-hidden rounded-3xl bg-slate-900/50 border border-white/10 p-8 md:p-12 backdrop-blur-sm hover:border-cyan-400/50 transition-colors duration-500">
             <div className="absolute -right-20 -top-20 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] group-hover:bg-cyan-400/20 transition-all" />
 
             <div className="text-cyan-400 text-4xl mb-6 bg-white/5 w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
@@ -133,7 +133,7 @@ export default function AboutSection() {
       style={{ height: `${cards.length * 150}vh` }}
     >
       <div className="sticky top-0 h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full h-screen overflow-y-scroll snap-y snap-mandatory">
           {/* Lado esquerdo — fixo */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

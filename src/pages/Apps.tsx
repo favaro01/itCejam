@@ -8,7 +8,7 @@ const apps = [
     name: "CIA",
     tagline: "Inteligência Artificial",
     description:
-      "Sua copiloto digital. Auditoria médica, suporte de TI e análise de dados em tempo real para revolucionar o atendimento.",
+      "Muito mais que um assistente virtual. A CIA é uma plataforma de Inteligência Artificial Generativa treinada para atuar como uma auditora sênior e analista de suporte. Ela processa documentos em segundos para garantir conformidade, tira dúvidas complexas na abertura de chamados via chat natural e oferece informações do ambiente CEJAM em tempo real.",
     features: [
       "Auditoria Automatizada",
       "Suporte 24/7",
@@ -18,41 +18,46 @@ const apps = [
     gradient: "from-cyan-500 to-blue-600",
     bgImage:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1920",
-    icon: "🤖",
   },
   {
     id: "cpm",
     name: "CPM",
     tagline: "Cejam na Palma da Mão",
     description:
-      "O Super App do colaborador. Tudo o que você precisa, do holerite à reserva de mesa, centralizado em um toque.",
+      "O centro nervoso da sua vida profissional. O CPM elimina a fragmentação de sistemas, reunindo tudo o que você precisa em uma única interface intuitiva. Precisa reservar uma estação de trabalho híbrida? Pedir reembolso de despesas via Paytrack? Ou tirar alguma dúvida com a CIA? Tudo está a um toque de distância.",
     features: ["Holerite Digital", "Reserva de Espaços", "Comunicação Interna"],
     color: "#8b5cf6",
     gradient: "from-purple-500 to-pink-600",
     bgImage:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1920",
-    icon: "📱",
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1920",
   },
   {
     id: "meurh",
     name: "Meu RH",
     tagline: "Gestão Descomplicada",
     description:
-      "Esqueça a papelada. Ponto eletrônico, férias e documentos direto no seu bolso. Powered by TOTVS.",
+      "Esqueça as filas no RH e a papelada física. Com a robustez da tecnologia TOTVS, o Meu RH entrega o controle da sua carreira nas suas mãos. Realize marcação de ponto por geolocalização com reconhecimento facial, envie atestados médicos digitalmente e programe suas férias com transparência total.",
     features: ["Ponto Eletrônico", "Gestão de Férias", "Documentos Digitais"],
     color: "#10b981",
     gradient: "from-emerald-500 to-teal-600",
     bgImage:
       "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920",
-    icon: "💼",
   },
 ];
 
 export default function Apps() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="relative bg-slate-950">
+    <div
+      ref={containerRef}
+      id="main-scroll-container"
+      // scroll-pt-32: Cria a zona de proteção para a Navbar
+      // snap-always: Força a parar em cada seção
+      className="relative h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-slate-950 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+    >
       {/* Hero Intro */}
-      <section className="relative h-screen flex flex-col items-center justify-center px-6">
+      <section className="relative h-screen snap-start snap-always flex flex-col items-center justify-center px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -91,53 +96,55 @@ export default function Apps() {
         </motion.div>
       </section>
 
-      {/* Sticky Stacking Sections */}
+      {/* Seções dos Apps */}
       {apps.map((app, index) => (
-        <AppSection key={app.id} app={app} index={index} />
+        <AppSection
+          key={app.id}
+          app={app}
+          index={index}
+          containerRef={containerRef}
+        />
       ))}
 
-      {/* Final Spacer */}
-      <div className="h-screen"></div>
+      {/* Spacer Final */}
+      <div className="h-[50vh] snap-start snap-always bg-slate-950 flex items-center justify-center">
+        <p className="text-slate-700 uppercase tracking-widest text-sm">
+          Fim do Tour
+        </p>
+      </div>
     </div>
   );
 }
 
-// ── APP SECTION COMPONENT (Sticky Parallax) ──────────────────
+// ── APP SECTION COMPONENT ────────────────────────────────────
 interface AppSectionProps {
   app: (typeof apps)[0];
   index: number;
+  containerRef: React.RefObject<HTMLElement>;
 }
 
-function AppSection({ app, index }: AppSectionProps) {
+function AppSection({ app, index, containerRef }: AppSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
+    container: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Parallax na imagem de fundo
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
-  // Fade out conforme a próxima seção entra
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 0.9, 1],
-    [0, 1, 1, 0.3],
-  );
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
+  // Opacidade ajustada para desaparecer suavemente quando sair da tela
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 0.9, 1], [0, 1, 1, 0]);
 
   return (
     <section
       ref={sectionRef}
-      className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
-      style={{
-        zIndex: index,
-      }}
+      className="sticky top-0 h-screen w-full snap-start snap-always flex items-center justify-center overflow-hidden"
+      style={{ zIndex: index }}
     >
-      {/* Background com Parallax */}
+      {/* Background */}
       <motion.div
-        style={{ scale: imageScale, y: imageY }}
+        style={{ scale: imageScale }}
         className="absolute inset-0 w-full h-full"
       >
         <img
@@ -145,25 +152,27 @@ function AppSection({ app, index }: AppSectionProps) {
           alt={app.name}
           className="w-full h-full object-cover"
         />
-        {/* Gradient Overlay */}
+
         <div
-          className={`absolute inset-0 bg-linear-to-t ${app.gradient} opacity-40 mix-blend-multiply`}
+          className={`absolute inset-0 bg-gradient-to-t ${app.gradient} opacity-30 mix-blend-multiply`}
         ></div>
-        <div className="absolute inset-0 bg-linear-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40"></div>
+
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/60 to-slate-950/30"></div>
       </motion.div>
 
-      {/* Content */}
+      {/* Conteúdo Centralizado */}
       <motion.div
         style={{ opacity }}
+        // REMOVIDO: pt-20 ou qualquer padding.
+        // Agora o 'flex items-center' do pai cuida de tudo.
         className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full"
       >
-        <div className="max-w-2xl space-y-8">
-          {/* Number Badge */}
+        <div className="max-w-2xl">
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
             className="inline-flex items-center gap-4"
           >
             <div
@@ -172,29 +181,27 @@ function AppSection({ app, index }: AppSectionProps) {
             >
               0{index + 1}
             </div>
-            <span className="text-sm font-bold uppercase tracking-[0.3em] text-slate-500">
+            <span className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">
               {app.tagline}
             </span>
           </motion.div>
 
-          {/* Title */}
+          {/* Título */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            viewport={{ once: true }}
           >
             <h2 className="font-bold text-7xl sm:text-8xl lg:text-9xl text-white leading-none mb-4">
               {app.name}
             </h2>
           </motion.div>
 
-          {/* Description */}
+          {/* Descrição */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
             className="text-xl sm:text-2xl text-slate-300 leading-relaxed border-l-4 pl-6"
             style={{ borderColor: app.color }}
           >
@@ -202,13 +209,7 @@ function AppSection({ app, index }: AppSectionProps) {
           </motion.p>
 
           {/* Features */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap gap-3"
-          >
+          <motion.div className="flex flex-wrap gap-3 py-3">
             {app.features.map((feature) => (
               <div
                 key={feature}
@@ -219,12 +220,11 @@ function AppSection({ app, index }: AppSectionProps) {
             ))}
           </motion.div>
 
-          {/* CTA */}
+          {/* Botão */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            viewport={{ once: true }}
           >
             <button
               type="button"
@@ -239,12 +239,6 @@ function AppSection({ app, index }: AppSectionProps) {
           </motion.div>
         </div>
       </motion.div>
-
-      {/* Glow Effect */}
-      <div
-        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full blur-[120px] opacity-20 pointer-events-none"
-        style={{ backgroundColor: app.color }}
-      ></div>
     </section>
   );
 }

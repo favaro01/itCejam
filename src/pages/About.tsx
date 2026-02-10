@@ -68,7 +68,7 @@ export default function About() {
         stagger: 0.1,
       });
     },
-    { scope: container }
+    { scope: container },
   );
 
   return (
@@ -90,11 +90,11 @@ export default function About() {
           </h2>
           <p className="about-text text-lg leading-relaxed text-slate-400">
             O Departamento de TI da CEJAM é responsável por toda a
-            infraestrutura digital que sustenta operações críticas de saúde.
-            De data centers a endpoints, passando por cibersegurança,
-            redes corporativas, sistemas hospitalares e automação — nós
-            somos a engenharia silenciosa que garante o funcionamento
-            ininterrupto de cada unidade.
+            infraestrutura digital que sustenta operações críticas de saúde. De
+            data centers a endpoints, passando por cibersegurança, redes
+            corporativas, sistemas hospitalares e automação — nós somos a
+            engenharia silenciosa que garante o funcionamento ininterrupto de
+            cada unidade.
           </p>
         </div>
 

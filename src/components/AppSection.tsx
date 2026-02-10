@@ -22,7 +22,7 @@ const apps = [
     description:
       "O Hub definitivo do colaborador. Centraliza Dashboards, Paytrack e Comunicação Interna. O destaque é o 'Meu Lugar': a gestão inteligente do trabalho híbrido que permite reservar sua estação de trabalho presencial em tempo real.",
     image:
-      "https://images.pexels.com/photos/7651937/pexels-photo-7651937.jpeg?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=600",
     gradient: "from-violet-500 to-fuchsia-500",
     glow: "#8b5cf6",
     phone: "left", // celular na esquerda, texto na direita
