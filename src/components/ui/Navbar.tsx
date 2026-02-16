@@ -68,7 +68,7 @@ export default function Navbar() {
             to="apps"
             className="hidden rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-sm font-medium text-white transition-shadow hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] md:inline-block"
           >
-            Aplicativos
+            Sistemas
           </Link>
         </div>
 
@@ -104,7 +104,7 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 className="mt-2 block w-full rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2.5 text-center text-sm font-medium text-white"
               >
-                Aplicativos
+                Sistemas
               </Link>
             </li>
           </ul>

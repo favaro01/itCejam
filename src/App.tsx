@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Plasma from "./components/ui/Plasma";
 import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
@@ -12,6 +13,7 @@ import Team from "./pages/Team";
 export default function App() {
   return (
     <div className="relative min-h-screen w-full bg-slate-950 font-sans text-slate-200 antialiased selection:bg-cejam-cyan selection:text-white">
+      <ScrollToTop />
       <div className="fixed inset-0 z-0 w-full h-full opacity-60 pointer-events-none">
         <Plasma
           color="#00adb8"

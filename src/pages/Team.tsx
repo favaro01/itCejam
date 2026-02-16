@@ -119,7 +119,7 @@ export default function Team() {
   const [activeLeaderId, setActiveLeaderId] = useState<number | null>(1);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+    <div className="min-h-screen text-white overflow-x-hidden">
       {/* ── SEÇÃO 1: LIDERANÇA (CINEMATIC LENS) ── */}
       <section className="relative pt-32 pb-20 px-4 min-h-screen flex flex-col justify-center">
         <div className="text-center mb-12 relative z-10">
@@ -154,7 +154,7 @@ export default function Team() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 flex flex-col items-center gap-2"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-500 flex flex-col items-center gap-2"
         >
           <span className="text-xs uppercase tracking-widest">
             Conheça as Equipes
@@ -164,7 +164,7 @@ export default function Team() {
       </section>
 
       {/* ── SEÇÃO 2: COLABORADORES (TECH MODULES) ── */}
-      <section className="relative py-32 px-6 bg-slate-900/50 border-t border-white/5">
+      <section className="relative py-32 px-6 glass border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="mb-20">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 // ── DADOS DOS APPS ───────────────────────────────────────────
@@ -49,10 +49,25 @@ const apps = [
 ];
 
 export default function Apps() {
+  // Ativa scroll-snap no <html> apenas enquanto esta página está montada
+  useEffect(() => {
+    const html = document.documentElement;
+    html.style.scrollSnapType = "y proximity";
+    html.style.scrollBehavior = "smooth";
+
+    return () => {
+      html.style.scrollSnapType = "";
+      html.style.scrollBehavior = "";
+    };
+  }, []);
+
   return (
-    <div className="relative bg-slate-950">
+    <div className="relative">
       {/* Hero Intro */}
-      <section className="relative h-screen flex flex-col items-center justify-center px-4 sm:px-6">
+      <section
+        className="relative h-screen flex flex-col items-center justify-center px-4 sm:px-6"
+        style={{ scrollSnapAlign: "start" }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,7 +79,7 @@ export default function Apps() {
           </span>
 
           <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white leading-tight">
-            Nossos Aplicativos
+            Nossos Sistemas
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -91,18 +106,18 @@ export default function Apps() {
         </motion.div>
       </section>
 
-      {/* Sticky Stacking Sections */}
+      {/* Sticky Stacking Sections com snap */}
       {apps.map((app, index) => (
         <AppSection key={app.id} app={app} index={index} />
       ))}
 
       {/* Final Spacer */}
-      <div className="h-screen"></div>
+      <div className="h-2.5" />
     </div>
   );
 }
 
-// ── APP SECTION COMPONENT (Sticky Parallax) ──────────────────
+// ── APP SECTION COMPONENT (Sticky + Snap) ────────────────────
 interface AppSectionProps {
   app: (typeof apps)[0];
   index: number;
@@ -118,7 +133,7 @@ function AppSection({ app, index }: AppSectionProps) {
 
   // Parallax na imagem de fundo
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
 
   // Fade out conforme a próxima seção entra
   const opacity = useTransform(
@@ -133,6 +148,7 @@ function AppSection({ app, index }: AppSectionProps) {
       className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
       style={{
         zIndex: index,
+        scrollSnapAlign: "start",
       }}
     >
       {/* Background com Parallax */}
