@@ -5,9 +5,9 @@ import Footer from "./components/ui/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Apps from "./pages/Apps";
-// import Units from "./pages/Units";
-// import Awards from "./pages/Awards";
-// import Team from "./pages/Team";
+import Units from "./pages/Units";
+import Awards from "./pages/Awards";
+import Team from "./pages/Team";
 
 export default function App() {
   return (
@@ -26,9 +26,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          {/* <Route path="/unidades" element={<Units />} /> */}
-          {/* <Route path="/premios" element={<Awards />} /> */}
-          {/* <Route path="/time" element={<Team />} /> */}
+          <Route path="/units" element={<Units />} />
+          <Route path="/awards" element={<Awards />} />
+          <Route path="/team" element={<Team />} />
           <Route path="/apps" element={<Apps />} />
           <Route
             path="*"
