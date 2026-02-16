@@ -60,7 +60,13 @@ const units = [
   },
 ];
 
-const categories = ["Todos", "Hospital", "UPA", "UBS", "AMA", "CER"];
+const categories = [
+  units[0].type,
+  units[1].type,
+  units[2].type,
+  units[3].type,
+  "Todos",
+];
 
 export default function Units() {
   const [filter, setFilter] = useState("Todos");
@@ -76,11 +82,11 @@ export default function Units() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white pb-32">
+    <div className="min-h-screen text-white pb-32">
       {/* ── HEADER COM SEARCH ── */}
       <section className="relative pt-40 pb-20 px-6 text-center overflow-hidden">
         {/* Glow de fundo */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -94,7 +100,7 @@ export default function Units() {
             </span>
           </h1>
 
-          {/* BARRA DE BUSCA FUTURISTA */}
+          {/* BARRA DE BUSCA */}
           <div className="relative group max-w-xl mx-auto">
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full opacity-25 group-hover:opacity-75 blur transition duration-500"></div>
             <div className="relative flex items-center bg-slate-900 rounded-full px-6 py-4 border border-white/10">

@@ -74,7 +74,13 @@ const textVariants = {
   exit: { opacity: 0, y: -40 },
 };
 
-function AppText({ index }: { index: number }) {
+function AppText({
+  index,
+  phoneOnRight,
+}: {
+  index: number;
+  phoneOnRight: boolean;
+}) {
   const app = apps[index];
   return (
     <AnimatePresence initial={false} mode="wait">
@@ -85,7 +91,7 @@ function AppText({ index }: { index: number }) {
         animate="center"
         exit="exit"
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="max-w-lg pointer-events-auto"
+        className={`flexmax-w-lg pointer-events-auto ${phoneOnRight ? "text-left" : "text-right"}`}
       >
         <div
           className={`inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r ${app.gradient} mb-4 sm:mb-8 border border-white/10`}
@@ -99,7 +105,9 @@ function AppText({ index }: { index: number }) {
           {app.title}
         </h3>
 
-        <p className="text-slate-400 text-base sm:text-xl leading-relaxed mb-6 sm:mb-10 border-l-2 border-white/10 pl-4 sm:pl-6">
+        <p
+          className={`text-slate-400 text-base sm:text-xl leading-relaxed mb-6 sm:mb-10 ${phoneOnRight ? "border-l-2 border-white/10 pl-4 sm:pl-6" : "border-r-2 border-white/10 pr-4 sm:pr-6"}`}
+        >
           {app.description}
         </p>
 
@@ -194,13 +202,15 @@ export default function AppShowcase() {
       style={{ height: `${apps.length * 150}vh` }}
     >
       <div className="sticky top-8 h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full justify-center flex flex-col items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full flex flex-col items-center">
           {/* Mobile: empilhado | Desktop: lado a lado com layout animation */}
           <LayoutGroup>
             <motion.div
               layout
-              className={`flex flex-col items-center gap-6 sm:gap-8 lg:gap-16 lg:flex-row ${
-                phoneOnRight ? "" : "lg:flex-row-reverse"
+              className={`w-full flex flex-col items-center gap-6 sm:gap-8 lg:gap-16 ${
+                phoneOnRight
+                  ? "lg:flex-row lg:justify-end"
+                  : "lg:flex-row-reverse lg:justify-between"
               }`}
               transition={{
                 layout: {
@@ -213,7 +223,7 @@ export default function AppShowcase() {
             >
               {/* Texto */}
               <motion.div layout className="flex-1 min-w-0">
-                <AppText index={index} />
+                <AppText index={index} phoneOnRight={phoneOnRight} />
               </motion.div>
 
               {/* Celular */}

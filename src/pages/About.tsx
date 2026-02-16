@@ -3,7 +3,9 @@ import {
   motion,
   useScroll,
   useTransform,
-  useMotionValueEvent,
+  useInView,
+  useMotionValue,
+  animate,
 } from "framer-motion";
 
 // ── DADOS DA LINHA DO TEMPO ──────────────────────────────
@@ -48,12 +50,12 @@ const timeline = [
 
 export default function About() {
   return (
-    <div className="bg-slate-950 text-white">
+    <div className="text-white">
       {/* ── HERO SECTION ── */}
       <section className="h-screen flex flex-col items-center justify-center relative overflow-hidden">
         {/* Background Animado */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/50 to-slate-950 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/50 to-slate-950 z-10"></div>
           <img
             src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1920&auto=format&fit=crop"
             className="w-full h-full object-cover opacity-40 animate-pulse-slow"
@@ -94,15 +96,15 @@ export default function About() {
       <HorizontalScrollCarousel />
 
       {/* ── STATS SECTION (Contadores) ── */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-slate-900 border-y border-white/5">
+      <section className="py-16 sm:py-24 lg:py-32 glass border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-3 gap-4 sm:gap-8 md:gap-12 text-center">
-          <StatItem number="30+" label="Anos de História" />
-          <StatItem number="23k+" label="Colaboradores" />
-          <StatItem number="100+" label="Unidades Geridas" />
+          <StatItem rawValue={30} suffix="+" label="Anos de História" />
+          <StatItem rawValue={23} suffix="k+" label="Colaboradores" />
+          <StatItem rawValue={100} suffix="+" label="Unidades Geridas" />
         </div>
       </section>
 
-      {/* ── MANIFESTO (Texto Final) ── */}
+      {/* ── MANIFESTO ── */}
       <section className="min-h-[60vh] sm:h-[80vh] flex items-center justify-center relative py-16 sm:py-0">
         <div className="max-w-4xl px-4 sm:px-6 text-center space-y-5 sm:space-y-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
@@ -148,15 +150,15 @@ const HorizontalScrollCarousel = () => {
   const x = useTransform(scrollYProgress, [0, 1], [0, -maxScroll]);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-slate-950">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+    <section ref={targetRef} className="relative h-[300vh]">
+      <div className="bg-gradient-to-r from-transparent to-transparent backdrop-blur-xl sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div
           ref={carouselRef}
           style={{ x }}
           className="flex gap-4 sm:gap-8 md:gap-12 pl-4 pr-4 sm:pl-12 sm:pr-24 md:pl-24 flex-nowrap"
         >
-          {timeline.map((item, i) => (
-            <TimelineCard key={i} item={item} />
+          {timeline.map((item) => (
+            <TimelineCard key={item.year} item={item} />
           ))}
         </motion.div>
       </div>
@@ -194,14 +196,40 @@ const TimelineCard = ({ item }: { item: (typeof timeline)[0] }) => {
   );
 };
 
-// ── COMPONENTE DE ESTATÍSTICA (Simples) ─────────────────────
-const StatItem = ({ number, label }: { number: string; label: string }) => (
-  <div className="space-y-1 sm:space-y-2">
-    <h3 className="text-3xl sm:text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-600">
-      {number}
-    </h3>
-    <p className="text-cyan-500 font-bold tracking-wider sm:tracking-widest uppercase text-[10px] sm:text-xs md:text-sm">
-      {label}
-    </p>
-  </div>
-);
+// ── COMPONENTE DE ESTATÍSTICA ─────────────────────
+interface StatItemProps {
+  rawValue: number;
+  suffix?: string;
+  label: string;
+}
+
+const StatItem = ({ rawValue, suffix = "", label }: StatItemProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const count = useMotionValue(0);
+
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, rawValue, {
+        duration: 2.5,
+        ease: [0.22, 1, 0.36, 1],
+      });
+      return controls.stop;
+    }
+  }, [isInView, rawValue, count]);
+
+  return (
+    <div ref={ref} className="space-y-2">
+      <h3 className="text-4xl sm:text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-600 flex justify-center items-center tabular-nums">
+        <motion.span>{rounded}</motion.span>
+        <span>{suffix}</span>
+      </h3>
+      <p className="text-cyan-500 font-bold tracking-widest uppercase text-xs sm:text-sm">
+        {label}
+      </p>
+    </div>
+  );
+};

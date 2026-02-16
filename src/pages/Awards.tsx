@@ -58,11 +58,11 @@ const awards = [
 
 export default function Awards() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white py-32 px-6 relative overflow-hidden">
+    <div className="min-h-screen text-white py-32 px-6 relative overflow-y-visible">
       {/* Background Decorativo */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[0%] right-[-10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[120px]" />
       </div>
 
       {/* Header */}
