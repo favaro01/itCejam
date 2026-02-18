@@ -91,7 +91,7 @@ function AppText({
         animate="center"
         exit="exit"
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`flexmax-w-lg pointer-events-auto ${phoneOnRight ? "text-left" : "text-right"}`}
+        className={`flexmax-w-lg pointer-events-auto items-center ${phoneOnRight ? "text-left" : "text-right"}`}
       >
         <div
           className={`inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r ${app.gradient} mb-4 sm:mb-8 border border-white/10`}
@@ -126,7 +126,7 @@ function AppText({
 function PhoneMockup({ index }: { index: number }) {
   const app = apps[index];
   return (
-    <div className="relative w-[180px] h-[360px] sm:w-[220px] sm:h-[440px] md:w-[260px] md:h-[520px] lg:w-[320px] lg:h-[640px] flex items-center">
+    <div className="relative w-[180px] h-[360px] sm:w-[220px] sm:h-[440px] md:w-[260px] md:h-[520px] lg:w-[320px] lg:h-[640px] flex items-center justify-center">
       {/* Mockup */}
       <div className="w-[90%] h-[90%] bg-slate-950 border-[6px] sm:border-[8px] border-slate-800 rounded-[2.5rem] sm:rounded-[3.5rem] shadow-2xl overflow-hidden ring-1 ring-white/10 relative">
         {/* Notch */}

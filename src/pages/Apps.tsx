@@ -1,73 +1,131 @@
-import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Bot,
+  Activity,
+  Building2,
+  Stethoscope,
+  ChevronDown,
+} from "lucide-react";
+import MainAppsSection from "../components/apps/MainAppsSection";
+import MedicsysSection from "../components/apps/MedicsysSection";
+import AdminSystemsSection from "../components/apps/AdminSystemsSection";
+import CareSystemsSection from "../components/apps/CareSystemsSection";
 
-// ── DADOS DOS APPS ───────────────────────────────────────────
-const apps = [
+// ── NAVEGAÇÃO DAS SEÇÕES ────────────────────────────────────────────────
+const sections = [
   {
-    id: "cia",
-    name: "CIA",
-    tagline: "Inteligência Artificial",
-    description:
-      "Sua copiloto digital. Auditoria médica, suporte de TI e análise de dados em tempo real para revolucionar o atendimento.",
-    features: [
-      "Auditoria Automatizada",
-      "Suporte 24/7",
-      "Analytics em Tempo Real",
-    ],
+    id: "principais-apps",
+    label: "Principais Apps",
+    Icon: Bot,
     color: "#00adb8",
-    gradient: "from-cyan-500 to-blue-600",
-    bgImage:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1920",
-    icon: "🤖",
+  },
+  { id: "medicsys", label: "MedicSys", Icon: Activity, color: "#14b8a6" },
+  {
+    id: "sistemas-administrativos",
+    label: "Administrativos",
+    Icon: Building2,
+    color: "#3b82f6",
   },
   {
-    id: "cpm",
-    name: "CPM",
-    tagline: "Cejam na Palma da Mão",
-    description:
-      "O Super App do colaborador. Tudo o que você precisa, do holerite à reserva de mesa, centralizado em um toque.",
-    features: ["Holerite Digital", "Reserva de Espaços", "Comunicação Interna"],
-    color: "#8b5cf6",
-    gradient: "from-purple-500 to-pink-600",
-    bgImage:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1920",
-    icon: "📱",
-  },
-  {
-    id: "meurh",
-    name: "Meu RH",
-    tagline: "Gestão Descomplicada",
-    description:
-      "Esqueça a papelada. Ponto eletrônico, férias e documentos direto no seu bolso. Powered by TOTVS.",
-    features: ["Ponto Eletrônico", "Gestão de Férias", "Documentos Digitais"],
-    color: "#10b981",
-    gradient: "from-emerald-500 to-teal-600",
-    bgImage:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920",
-    icon: "💼",
+    id: "sistemas-assistenciais",
+    label: "Assistenciais",
+    Icon: Stethoscope,
+    color: "#06b6d4",
   },
 ];
 
-export default function Apps() {
-  // Ativa scroll-snap no <html> apenas enquanto esta página está montada
-  useEffect(() => {
-    const html = document.documentElement;
-    html.style.scrollSnapType = "y proximity";
-    html.style.scrollBehavior = "smooth";
+function SectionNav() {
+  const [active, setActive] = useState<string | null>(null);
+  const [visible, setVisible] = useState(false);
 
-    return () => {
-      html.style.scrollSnapType = "";
-      html.style.scrollBehavior = "";
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show nav after scrolling past the hero
+      setVisible(window.scrollY > window.innerHeight * 0.5);
+
+      // Determine which section is in view
+      let current: string | null = null;
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom > 200) {
+            current = section.id;
+          }
+        }
+      }
+      setActive(current);
     };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.nav
+          initial={{ y: -80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -80, opacity: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed top-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 sm:gap-2 px-2 py-2 rounded-full bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/20"
+        >
+          {sections.map((s) => {
+            const isActive = active === s.id;
+            return (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => scrollTo(s.id)}
+                className={`relative flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap ${
+                  isActive ? "text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeSection"
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      backgroundColor: `${s.color}20`,
+                      border: `1px solid ${s.color}40`,
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <s.Icon
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative z-10"
+                  style={isActive ? { color: s.color } : undefined}
+                />
+                <span className="relative z-10 hidden sm:inline">
+                  {s.label}
+                </span>
+              </button>
+            );
+          })}
+        </motion.nav>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export default function Apps() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="relative">
+      <SectionNav />
+
       {/* Hero Intro */}
-      <section
-        className="relative h-screen flex flex-col items-center justify-center px-4 sm:px-6"
-        style={{ scrollSnapAlign: "start" }}
-      >
+      <section className="relative h-screen flex flex-col items-center justify-center px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,6 +144,34 @@ export default function Apps() {
             Tecnologia que transforma o dia a dia de colaboradores, gestores e
             pacientes.
           </p>
+
+          {/* Quick Jump Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-3 pt-4"
+          >
+            {sections.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() =>
+                  document
+                    .getElementById(s.id)
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="group flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-white/3 text-sm text-slate-300 font-medium hover:border-white/20 hover:bg-white/6 transition-all duration-300 cursor-pointer"
+              >
+                <s.Icon
+                  className="w-4 h-4 transition-colors"
+                  style={{ color: s.color }}
+                />
+                {s.label}
+                <ChevronDown className="w-3 h-3 text-slate-500 group-hover:translate-y-0.5 transition-transform" />
+              </button>
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -106,161 +192,17 @@ export default function Apps() {
         </motion.div>
       </section>
 
-      {/* Sticky Stacking Sections com snap */}
-      {apps.map((app, index) => (
-        <AppSection key={app.id} app={app} index={index} />
-      ))}
+      {/* Seção 1: Principais Apps */}
+      <MainAppsSection />
 
-      {/* Final Spacer */}
-      <div className="h-2.5" />
+      {/* Seção 2: MedicSys */}
+      <MedicsysSection />
+
+      {/* Seção 3: Sistemas Administrativos */}
+      <AdminSystemsSection />
+
+      {/* Seção 4: Sistemas Assistenciais */}
+      <CareSystemsSection />
     </div>
-  );
-}
-
-// ── APP SECTION COMPONENT (Sticky + Snap) ────────────────────
-interface AppSectionProps {
-  app: (typeof apps)[0];
-  index: number;
-}
-
-function AppSection({ app, index }: AppSectionProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Parallax na imagem de fundo
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
-
-  // Fade out conforme a próxima seção entra
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 0.9, 1],
-    [0, 1, 1, 0.3],
-  );
-
-  return (
-    <section
-      ref={sectionRef}
-      className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
-      style={{
-        zIndex: index,
-        scrollSnapAlign: "start",
-      }}
-    >
-      {/* Background com Parallax */}
-      <motion.div
-        style={{ scale: imageScale, y: imageY }}
-        className="absolute inset-0 w-full h-full"
-      >
-        <img
-          src={app.bgImage}
-          alt={app.name}
-          className="w-full h-full object-cover"
-        />
-        {/* Gradient Overlay */}
-        <div
-          className={`absolute inset-0 bg-linear-to-t ${app.gradient} opacity-40 mix-blend-multiply`}
-        ></div>
-        <div className="absolute inset-0 bg-linear-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40"></div>
-      </motion.div>
-
-      {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full"
-      >
-        <div className="max-w-2xl space-y-8">
-          {/* Number Badge */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-4"
-          >
-            <div
-              className="w-12 h-12 rounded-full border-2 flex items-center justify-center font-bold text-lg"
-              style={{ borderColor: app.color, color: app.color }}
-            >
-              0{index + 1}
-            </div>
-            <span className="text-sm font-bold uppercase tracking-[0.3em] text-slate-500">
-              {app.tagline}
-            </span>
-          </motion.div>
-
-          {/* Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-white leading-none mb-4">
-              {app.name}
-            </h2>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 leading-relaxed border-l-4 pl-4 sm:pl-6"
-            style={{ borderColor: app.color }}
-          >
-            {app.description}
-          </motion.p>
-
-          {/* Features */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap gap-3"
-          >
-            {app.features.map((feature) => (
-              <div
-                key={feature}
-                className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-sm text-slate-300"
-              >
-                {feature}
-              </div>
-            ))}
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <button
-              type="button"
-              className="group px-6 py-3 sm:px-8 sm:py-4 rounded-full border-2 text-white font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-white hover:text-slate-950 transition-all duration-300"
-              style={{ borderColor: app.color }}
-            >
-              Saiba Mais
-              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-            </button>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Glow Effect */}
-      <div
-        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 lg:w-150 lg:h-150 rounded-full blur-[80px] sm:blur-[120px] opacity-20 pointer-events-none"
-        style={{ backgroundColor: app.color }}
-      ></div>
-    </section>
   );
 }
