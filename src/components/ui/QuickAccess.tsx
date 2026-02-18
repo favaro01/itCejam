@@ -6,7 +6,7 @@ const items = [
   {
     id: "quality",
     icon: FileText,
-    label: "Gestão da Qualidade da TI",
+    label: "Qualidade da TI",
     href: "https://sites.google.com/cejamcloud.com.br/sgqcejam/administra%C3%A7%C3%A3o/inova%C3%A7%C3%A3o-e-tecnologia?authuser=1", // Exemplo de link externo
   },
   {
@@ -41,7 +41,7 @@ export default function QuickAccess() {
               transition: { staggerChildren: 0.1 },
             },
           }}
-          className="flex flex-wrap justify-between gap-8 md:gap-12"
+          className="flex flex-wrap justify-evenly gap-8 md:gap-12"
         >
           {items.map((item) => (
             <GlassButton key={item.id} item={item} />
@@ -62,7 +62,7 @@ const GlassButton = ({ item }: GlassButtonProps) => {
   const isExternal = item.href.startsWith("http");
 
   return (
-    <motion.a // 🚨 MUDAMOS DE 'button' PARA 'a'
+    <motion.a
       href={item.href}
       target={isExternal ? "_blank" : "_self"} // Abre externos em nova aba
       rel={isExternal ? "noopener noreferrer" : undefined} // Segurança para links externos
@@ -72,7 +72,7 @@ const GlassButton = ({ item }: GlassButtonProps) => {
       }}
       whileHover={{ y: -5 }}
       whileTap={{ scale: 0.95 }}
-      className="group flex flex-col items-center gap-4 cursor-pointer" // Adicionei cursor-pointer
+      className="group flex flex-col items-center gap-4 cursor-pointer"
     >
       {/* O Círculo Glassmorphism */}
       <div
