@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import { Link } from "react-router-dom";
 
 // ── Dados ─────────────────────────────────────────────────────────────
 const apps = [
@@ -13,6 +14,7 @@ const apps = [
       "https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-cejam-cyan to-blue-600",
     glow: "#00adb8",
+    link: "/cia",
     phone: "right", // celular na direita, texto na esquerda
   },
   {
@@ -25,6 +27,7 @@ const apps = [
       "https://images.pexels.com/photos/7071/space-desk-office-workspace.jpg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-violet-500 to-fuchsia-500",
     glow: "#8b5cf6",
+    link: "/sistemas",
     phone: "left", // celular na esquerda, texto na direita
   },
   {
@@ -37,6 +40,7 @@ const apps = [
       "https://images.pexels.com/photos/7875996/pexels-photo-7875996.jpeg?auto=format&fit=crop&q=80&w=600",
     gradient: "from-emerald-400 to-green-600",
     glow: "#10b981",
+    link: "/sistemas",
     phone: "right", // celular na direita, texto na esquerda
   },
 ];
@@ -94,7 +98,7 @@ function AppText({
         className={`flexmax-w-lg pointer-events-auto items-center ${phoneOnRight ? "text-left" : "text-right"}`}
       >
         <div
-          className={`inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r ${app.gradient} mb-4 sm:mb-8 border border-white/10`}
+          className={`inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r ${app.gradient} mb-4`}
         >
           <span className="text-white font-bold text-xs tracking-[0.2em] uppercase">
             {app.category}
@@ -110,13 +114,14 @@ function AppText({
         >
           {app.description}
         </p>
-
-        <button
-          type="button"
-          className="px-6 py-3 sm:px-8 sm:py-4 rounded-full border border-white/20 text-white font-bold text-sm sm:text-base uppercase tracking-widest hover:bg-white hover:text-slate-950 transition-all duration-300 cursor-pointer"
-        >
-          Ver Funcionalidades
-        </button>
+        <Link to={app.link}>
+          <button
+            type="button"
+            className="px-6 py-3 sm:px-8 sm:py-4 rounded-full border border-white/20 text-white font-bold text-sm sm:text-base uppercase tracking-widest hover:bg-white hover:text-slate-950 transition-all duration-300 cursor-pointer"
+          >
+            Ver Funcionalidades {app.link === "/cia" ? "da CIA" : "do App"}
+          </button>
+        </Link>
       </motion.div>
     </AnimatePresence>
   );

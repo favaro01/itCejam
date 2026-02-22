@@ -10,7 +10,7 @@ const units = [
     type: "Hospital",
     address: "Estrada do M'Boi Mirim, 5203 - Jd. Ângela",
     status: "Aberto 24h",
-    img: "https://images.unsplash.com/photo-1587351021759-3e566b9af955?auto=format&fit=crop&q=80&w=800",
+    img: "https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=format&fit=crop&q=80&w=800",
     color: "border-cyan-500",
   },
   {
@@ -46,7 +46,7 @@ const units = [
     type: "Hospital",
     address: "Ilha do Governador, RJ",
     status: "Aberto 24h",
-    img: "https://images.unsplash.com/photo-1516549655169-df83a092dd14?auto=format&fit=crop&q=80&w=800",
+    img: "https://images.pexels.com/photos/11782003/pexels-photo-11782003.jpeg?auto=format&fit=crop&q=80&w=800",
     color: "border-cyan-500",
   },
   {

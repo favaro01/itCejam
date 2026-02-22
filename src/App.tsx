@@ -71,11 +71,11 @@ export default function App() {
         <div className="relative z-10">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/units" element={<Units />} />
-            <Route path="/awards" element={<Awards />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/apps" element={<Apps />} />
+            <Route path="/sobre" element={<About />} />
+            <Route path="/unidades" element={<Units />} />
+            <Route path="/premios" element={<Awards />} />
+            <Route path="/time" element={<Team />} />
+            <Route path="/sistemas" element={<Apps />} />
             <Route path="/cia" element={<CIA />} />
             <Route
               path="*"

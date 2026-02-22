@@ -3,10 +3,10 @@ import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const links = [
-  { label: "Sobre", href: "about" },
-  { label: "Unidades", href: "units" },
-  { label: "Prêmios", href: "awards" },
-  { label: "Time", href: "team" },
+  { label: "Sobre", href: "sobre" },
+  { label: "Unidades", href: "unidades" },
+  { label: "Prêmios", href: "premios" },
+  { label: "Time", href: "time" },
 ];
 
 export default function Navbar() {

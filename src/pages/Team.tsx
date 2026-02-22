@@ -14,6 +14,8 @@ import {
   Lock,
   Globe,
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { line } from "framer-motion/client";
 
 // ── DADOS 1: LIDERANÇA (Cinematic Lens) ──────────────────────
 const leaders = [
@@ -21,22 +23,34 @@ const leaders = [
     id: 1,
     name: "Rodrigo Miranda",
     role: "Gerente de Inovação e Tecnologia",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800",
+    img: "src/assets/images/miranda.jpg",
     quote: "Excelência é um hábito, não um ato.",
+    linkedin: "https://www.linkedin.com/in/rodrigomirandadev/",
   },
   {
     id: 2,
-    name: "Ana Silva",
-    role: "Gerente de Inovação",
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
+    name: "Rodrigo Silva",
+    role: "Coord. de Sustentação e Infraestrutura",
+    img: "src/assets/images/silva.jpg",
     quote: "Tecnologia deve servir à vida.",
+    linkedin: "https://www.linkedin.com/in/rodrigo-silva-27568299/",
   },
   {
     id: 3,
-    name: "Carlos Mendes",
-    role: "Coord. Tecnologia",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+    name: "Marcel Leme",
+    role: "Coord. de Sistemas e Desenvolvimento",
+    img: "src/assets/images/marcel.jpg",
     quote: "Construindo o futuro, linha por linha.",
+    linkedin: "https://www.linkedin.com/in/marcel-leme/",
+  },
+  {
+    id: 4,
+    name: "Jefferson Nascimento",
+    role: "Coord. de Soluções Corporativas",
+    img: "src/assets/images/jefferson.jpg",
+    quote: "Soluções inteligentes para desafios complexos.",
+    linkedin:
+      "https://www.linkedin.com/in/jefferson-carlos-da-silva-nascimento-9134627a/",
   },
 ];
 
@@ -49,13 +63,13 @@ const departments = [
     teams: [
       {
         name: "Suporte Técnico",
-        role: "N1 & Field",
+        role: "N1",
         count: 4,
         icon: Headphones,
       },
       {
         name: "Infraestrutura TI",
-        role: "Redes & Servers",
+        role: "Redes & Servidores",
         count: 2,
         icon: Server,
       },
@@ -81,7 +95,7 @@ const departments = [
     teams: [
       {
         name: "Desenvolvimento",
-        role: "Engenharia de Software",
+        role: "Engenharia de Software e Mobile",
         count: 9,
         icon: Code2,
       },
@@ -240,16 +254,11 @@ const LeaderCard = ({
         </p>
         <div className="flex gap-3">
           <button
+            onClick={() => window.open(leader.linkedin, "_blank")}
             type="button"
             className="p-3 rounded-full bg-white/10 hover:bg-white text-white hover:text-slate-950 transition-all"
           >
             <Linkedin className="w-5 h-5" />
-          </button>
-          <button
-            type="button"
-            className="p-3 rounded-full bg-white/10 hover:bg-white text-white hover:text-slate-950 transition-all"
-          >
-            <Mail className="w-5 h-5" />
           </button>
         </div>
       </div>
