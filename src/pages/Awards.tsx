@@ -13,8 +13,8 @@ const awards = [
     id: 1,
     title: "Excelência em Saúde",
     org: "Organização Nacional de Acreditação (ONA)",
-    year: "2023",
-    desc: "Acreditação Nível 3 (Excelência) pela gestão de qualidade e segurança do paciente no Hospital M'Boi Mirim.",
+    year: "2024",
+    desc: "Até 2024, 38 unidades do CEJAM possuem selos da ONA, 8 unidades com ONA Nível 3 (Ouro), 1 unidade com ONA Nível 2 (Prata) e 29 unidades com ONA Nível 1 (Bronze)",
     icon: Trophy,
     color: "from-yellow-400 via-orange-500 to-yellow-600",
   },
@@ -29,9 +29,9 @@ const awards = [
   },
   {
     id: 3,
-    title: "Melhores para Trabalhar",
-    org: "Great Place to Work (GPTW)",
-    year: "2022 - 2024",
+    title: "Ambiente de Trabalho Exemplar",
+    org: "Great Place to Work",
+    year: "2022-2024",
     desc: "Reconhecimento consecutivo como uma das melhores empresas para se trabalhar na área da saúde.",
     icon: Star,
     color: "from-emerald-400 via-green-500 to-teal-600",
@@ -95,7 +95,7 @@ export default function Awards() {
   );
 }
 
-// ── COMPONENTE SPOTLIGHT CARD (O Segredo) ────────────────────
+// ── COMPONENTE SPOTLIGHT CARD ────────────────────
 const SpotlightCard = ({ award }: { award: (typeof awards)[0] }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -139,7 +139,7 @@ const SpotlightCard = ({ award }: { award: (typeof awards)[0] }) => {
       }}
       className="group relative h-96 rounded-3xl bg-slate-900 border border-white/10 overflow-hidden"
     >
-      {/* 1. O BRILHO DO SPOTLIGHT (Segue o mouse) */}
+      {/* 1. O BRILHO DO SPOTLIGHT */}
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
@@ -154,18 +154,18 @@ const SpotlightCard = ({ award }: { award: (typeof awards)[0] }) => {
       />
 
       {/* 2. CONTEÚDO DO CARD */}
-      <div className="absolute inset-0 p-8 flex flex-col justify-between h-full transform transition-transform duration-500 group-hover:scale-[0.98]">
+      <div className="absolute inset-0 p-8 flex flex-col items-center justify-center h-full transform transition-transform duration-500 group-hover:scale-[0.98]">
         {/* Ícone com Glow */}
-        <div className="relative w-16 h-16 rounded-2xl bg-slate-950 border border-white/10 flex items-center justify-center mb-6 group-hover:border-cyan-500/50 transition-colors duration-500">
+        <div className="relative w-20 h-20 rounded-2xl bg-slate-950 border border-white/10 flex items-center justify-center mb-6 group-hover:border-cyan-500/50 transition-colors duration-500">
           <div
             className={`absolute inset-0 bg-gradient-to-br ${award.color} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`}
           ></div>
-          <award.icon className="w-8 h-8 text-white relative z-10" />
+          <award.icon className="w-10 h-10 text-white relative z-10" />
         </div>
 
-        <div>
+        <div className="text-center">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-widest border border-slate-800 px-3 py-1 rounded-full bg-slate-950">
+            <span className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest border border-slate-800 px-3 py-1 rounded-full bg-slate-950">
               {award.year}
             </span>
             <span className="text-xs text-cyan-400 font-bold uppercase tracking-wider">

@@ -98,9 +98,9 @@ export default function About() {
       {/* ── STATS SECTION (Contadores) ── */}
       <section className="py-16 sm:py-24 lg:py-32 glass border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-3 gap-4 sm:gap-8 md:gap-12 text-center">
-          <StatItem rawValue={30} suffix="+" label="Anos de História" />
-          <StatItem rawValue={23} suffix="k+" label="Colaboradores" />
-          <StatItem rawValue={100} suffix="+" label="Unidades Geridas" />
+          <StatItem rawValue={34} suffix="+" label="Anos de História" />
+          <StatItem rawValue={24} suffix="k+" label="Colaboradores" />
+          <StatItem rawValue={120} suffix="+" label="Unidades Geridas" />
         </div>
       </section>
 

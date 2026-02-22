@@ -1,42 +1,42 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  ArrowUpRight,
-  MapPin,
-  Heart,
-  Globe,
-  Shield,
-} from "lucide-react";
+import { Github, Linkedin, MapPin, Heart, Globe } from "lucide-react";
 import { useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
   {
     title: "Ecossistema",
     links: [
-      "Sistemas CIA & CPM",
-      "Portal do Colaborador",
-      "Intranet Corporativa",
-      "Cloud CEJAM",
+      { text: "Inteligência Artificial do CEJAM", href: "/sistemas" },
+      { text: "App Palma da Mão", href: "/sistemas" },
+      { text: "Medicsys", href: "/sistemas" },
+      { text: "Meu RH", href: "/sistemas" },
     ],
   },
   {
     title: "Institucional",
     links: [
-      "Sobre a Tecnologia",
-      "Nossa Equipe",
-      "Carreiras Tech",
-      "Compliance & LGPD",
+      { text: "Sobre o a Inovação e Tecnologia", href: "/sobre" },
+      { text: "Nossas Unidades", href: "/unidades" },
+      { text: "Premiações", href: "/premios" },
     ],
   },
   {
-    title: "Suporte",
+    title: "Informações Úteis",
     links: [
-      "Abrir Chamado",
-      "Status dos Serviços",
-      "Base de Conhecimento",
-      "Manual do Usuário",
+      {
+        text: "Gestão de Qualidade",
+        href: "https://sites.google.com/cejamcloud.com.br/sgqcejam/administra%C3%A7%C3%A3o/inova%C3%A7%C3%A3o-e-tecnologia?authuser=1",
+      },
+      { text: "Medicsys", href: "https://cejam.medicsys.com.br/Login" },
+      {
+        text: "Fale Conosco",
+        href: "https://www.cejamcloud.com.br/fale-com-a-gente",
+      },
+      {
+        text: "CEJAM em Números",
+        href: "https://drive.google.com/file/d/1SWgoQLM751z1ED21eLfI5VmKEEGM9aTN/view",
+      },
     ],
   },
 ];
@@ -102,28 +102,22 @@ export default function Footer({ onVisibilityChange }: FooterProps) {
                 e propósito.
               </p>
             </div>
-
-            <a
-              href="#"
-              className="group flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-500/30 transition-all duration-300"
-            >
-              <span className="font-semibold text-white group-hover:text-cyan-400 transition-colors">
-                Fale com a TI
-              </span>
-              <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
           </div>
 
-          {/* ── GRID DE LINKS (Clean) ── */}
+          {/* ── GRID DE LINKS ── */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
             {/* Coluna 1: Marca (Ocupa 4 espaços) */}
             <div className="md:col-span-4 space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
-                  <Shield className="w-5 h-5" />
-                </div>
+                <img
+                  className="w-10 object-contain"
+                  src="https://midias.medicsys.com.br/logoCejam.png"
+                  alt="CEJAM Tecnologia logo"
+                />
                 <div>
-                  <h3 className="text-xl font-bold text-white">CEJAM</h3>
+                  <h3 className="font-logo text-xl font-bold text-white">
+                    CEJAM
+                  </h3>
                   <p className="text-xs uppercase tracking-widest text-cyan-500 font-bold">
                     Tecnologia
                   </p>
@@ -156,17 +150,31 @@ export default function Footer({ onVisibilityChange }: FooterProps) {
                 <div key={col.title}>
                   <h4 className="font-bold text-white mb-6">{col.title}</h4>
                   <ul className="space-y-4">
-                    {col.links.map((link) => (
-                      <li key={link}>
-                        <a
-                          href="#"
-                          className="text-sm text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-2 group"
-                        >
-                          <span className="w-1 h-1 rounded-full bg-cyan-500/0 group-hover:bg-cyan-500 transition-all" />
-                          {link}
-                        </a>
-                      </li>
-                    ))}
+                    {col.links.map((link) => {
+                      const isExternal = link.href.startsWith("http");
+                      const className =
+                        "text-sm text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-2 group";
+                      return (
+                        <li key={link.text}>
+                          {isExternal ? (
+                            <a
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={className}
+                            >
+                              <span className="w-1 h-1 rounded-full bg-cyan-500/0 group-hover:bg-cyan-500 transition-all" />
+                              {link.text}
+                            </a>
+                          ) : (
+                            <Link to={link.href} className={className}>
+                              <span className="w-1 h-1 rounded-full bg-cyan-500/0 group-hover:bg-cyan-500 transition-all" />
+                              {link.text}
+                            </Link>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               ))}
@@ -189,7 +197,7 @@ export default function Footer({ onVisibilityChange }: FooterProps) {
               <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/5">
                 Feito com{" "}
                 <Heart className="w-3 h-3 text-red-500 fill-red-500" /> pela
-                Inovação
+                Equipe de Tecnologia
               </span>
             </div>
           </div>

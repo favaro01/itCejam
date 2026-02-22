@@ -18,7 +18,7 @@ import AIOrb from "../components/Orb";
 
 // ── Diálogos sequenciais da C.I.A ──
 const dialogues = [
-  "Olá. Eu sou a C.I.A — Central de Inteligência Analítica.",
+  "Olá. Eu sou a C.I.A a Inteligência Artificial do CEJAM.",
   "Processo milhões de dados clínicos por segundo para garantir que nenhuma decisão médica seja tomada no escuro.",
   "Vamos explorar o que eu posso fazer.",
 ];
@@ -168,15 +168,6 @@ export default function CIA() {
     <div className="min-h-screen text-white">
       {/* ━━━━━━━━━━━━━ HERO / INTRO ━━━━━━━━━━━━━ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6">
-        {/* Botão Voltar */}
-        <Link
-          to="/"
-          className="absolute top-8 left-8 p-3 rounded-full bg-white/5 hover:bg-white/10 transition-colors z-50 group"
-          aria-label="Voltar para a Home"
-        >
-          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-        </Link>
-
         {/* Grid de Fundo */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-size-[32px_32px] pointer-events-none" />
 
@@ -429,7 +420,7 @@ export default function CIA() {
                 to="/team"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-white/10 text-white font-bold hover:bg-white/5 hover:border-white/20 transition-all duration-300 active:scale-[0.98]"
               >
-                <span>Falar com o Time</span>
+                <span>Conheça o Time</span>
               </Link>
             </div>
           </motion.div>

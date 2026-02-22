@@ -9,24 +9,24 @@ const cards = [
     title: "Quem Somos",
     content:
       "Não somos apenas TI. Somos o cérebro digital de uma das maiores Organizações Sociais de Saúde do Brasil. Gerenciamos a tecnologia que conecta médicos, pacientes e dados em tempo real.",
-    stats: "23k+ Colaboradores",
-    icon: <Hospital />,
+    stats: "24k+ Colaboradores",
+    icon: <Hospital className="w-10 h-10" />,
   },
   {
     id: 2,
     title: "O Que Fazemos",
     content:
-      "Do prontuário eletrônico à infraestrutura de nuvem. Desenvolvemos soluções que eliminam filas, protegem dados sensíveis e garantem que o sistema de saúde nunca pare.",
-    stats: "3.8M Consultas/Ano",
-    icon: <MonitorCheck />,
+      "Do prontuário eletrônico à infraestrutura de nuvem. Desenvolvemos soluções que eliminam filas, protegem dados sensíveis e garantem que o sistema de saúde público nunca pare.",
+    stats: "4.1M Consultas/Ano",
+    icon: <MonitorCheck className="w-10 h-10" />,
   },
   {
     id: 3,
     title: "Nossos Valores",
     content:
       "Humanização no código. Acreditamos que por trás de cada tela existe uma vida. Transparência, Inovação e Agilidade são requisitos do nosso sistema.",
-    stats: "100+ Unidades",
-    icon: <Gem />,
+    stats: "120+ Unidades",
+    icon: <Gem className="w-10 h-10" />,
   },
 ];
 
@@ -94,16 +94,16 @@ function CardStack({ index, dir }: { index: number; dir: number }) {
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
-          <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900/50 border border-white/10 p-6 sm:p-8 md:p-12 backdrop-blur-sm h-full hover:border-cyan-400/50 transition-colors duration-500">
-            <div className="absolute -right-20 -top-20 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] group-hover:bg-cyan-400/20 transition-all" />
+          <div className="group flex-col relative overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900/50 border border-white/10 p-8 sm:p-8 md:p-12 backdrop-blur-sm h-full hover:border-cyan-400/50 transition-colors duration-500">
+            <div className="absolute -right-10 -top-20 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] group-hover:bg-cyan-400/20 transition-all" />
 
-            <div className="text-cyan-400 text-3xl sm:text-4xl mb-4 sm:mb-6 bg-white/5 w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
+            <div className="absolute right-5 top-5 text-cyan-400 text-3xl sm:text-4xl rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
               {card.icon}
             </div>
-            <h3 className="font-bold text-xl sm:text-2xl md:text-3xl text-white mb-2 sm:mb-4">
+            <h3 className="pt-5 font-bold text-xl sm:text-2xl md:text-3xl text-white mb-2 sm:mb-4">
               {card.title}
             </h3>
-            <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-8">
+            <p className="pt-5 text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-8">
               {card.content}
             </p>
 
