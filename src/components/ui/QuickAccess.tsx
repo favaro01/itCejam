@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import { FileText, Network, Monitor, Award, Lightbulb } from "lucide-react";
+import { FileText, Monitor, Award } from "lucide-react";
 
 const items = [
   {
@@ -25,11 +25,11 @@ const items = [
 
 export default function QuickAccess() {
   return (
-    <section className="relative w-full py-24 px-6 overflow-hidden">
+    <section className="relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw] py-24 px-6 md:px-12 overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-32 bg-cyan-500/15 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-32 bg-cyan-500/15 blur-[100px] rounded-full pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto">
+      <div className="w-full">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -41,7 +41,7 @@ export default function QuickAccess() {
               transition: { staggerChildren: 0.1 },
             },
           }}
-          className="flex flex-wrap justify-evenly gap-8 md:gap-12"
+          className="w-full flex flex-wrap justify-center md:justify-around gap-8 md:gap-12"
         >
           {items.map((item) => (
             <GlassButton key={item.id} item={item} />

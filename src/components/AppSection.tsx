@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 // ── Dados ─────────────────────────────────────────────────────────────
@@ -45,57 +45,48 @@ const apps = [
   },
 ];
 
-// ── Hook: scroll index ────────────────────────────────────────────────
-function useScrollIndex(
-  ref: React.RefObject<HTMLElement | null>,
-  total: number,
-) {
-  const [index, setIndex] = useState(0);
+const wrapIndex = (value: number) => (value + apps.length) % apps.length;
+const swipeThreshold = 9000;
+const transitionDelayMs = 120;
 
-  useEffect(() => {
-    const onScroll = () => {
-      const el = ref.current;
-      if (!el) return;
-      const { top } = el.getBoundingClientRect();
-      const scrollable = el.offsetHeight - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, -top / scrollable));
-      const next = Math.min(total - 1, Math.floor(progress * total));
-      setIndex(next);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [ref, total]);
-
-  return index;
+function swipePower(offset: number, velocity: number) {
+  return Math.abs(offset) * velocity;
 }
 
 // ── Texto animado ─────────────────────────────────────────────────────
 const textVariants = {
-  enter: { opacity: 0, y: 40 },
-  center: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -40 },
+  enter: (d: number) => ({ x: d > 0 ? 90 : -90, opacity: 0, y: 18 }),
+  center: { x: 0, opacity: 1, y: 0 },
+  exit: (d: number) => ({ x: d > 0 ? -90 : 90, opacity: 0, y: -18 }),
+};
+
+const phoneVariants = {
+  enter: (d: number) => ({ x: d > 0 ? -70 : 70, opacity: 0, scale: 0.95 }),
+  center: { x: 0, opacity: 1, scale: 1 },
+  exit: (d: number) => ({ x: d > 0 ? 70 : -70, opacity: 0, scale: 0.95 }),
 };
 
 function AppText({
   index,
+  dir,
   phoneOnRight,
 }: {
   index: number;
+  dir: number;
   phoneOnRight: boolean;
 }) {
   const app = apps[index];
   return (
-    <AnimatePresence initial={false} mode="wait">
+    <AnimatePresence initial={false} custom={dir} mode="wait">
       <motion.div
         key={index}
+        custom={dir}
         variants={textVariants}
         initial="enter"
         animate="center"
         exit="exit"
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`flexmax-w-lg pointer-events-auto items-center ${phoneOnRight ? "text-left" : "text-right"}`}
+        className={`max-w-lg pointer-events-auto ${phoneOnRight ? "text-left" : "text-right"}`}
       >
         <div
           className={`inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r ${app.gradient} mb-4`}
@@ -128,43 +119,63 @@ function AppText({
 }
 
 // ── Celular ───────────────────────────────────────────────────────────
-function PhoneMockup({ index }: { index: number }) {
+function PhoneMockup({
+  index,
+  dir,
+  onPaginate,
+}: {
+  index: number;
+  dir: number;
+  onPaginate: (direction: number) => void;
+}) {
   const app = apps[index];
   return (
     <div className="relative w-[180px] h-[360px] sm:w-[220px] sm:h-[440px] md:w-[260px] md:h-[520px] lg:w-[320px] lg:h-[640px] flex items-center justify-center">
-      {/* Mockup */}
-      <div className="w-[90%] h-[90%] bg-slate-950 border-[6px] sm:border-[8px] border-slate-800 rounded-[2.5rem] sm:rounded-[3.5rem] shadow-2xl overflow-hidden ring-1 ring-white/10 relative">
-        {/* Notch */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-36 h-5 sm:h-7 bg-slate-800 rounded-b-2xl z-20 flex justify-center items-center">
-          <div className="w-12 h-1.5 bg-slate-900 rounded-full opacity-50" />
-        </div>
+      <AnimatePresence initial={false} custom={dir} mode="wait">
+        <motion.div
+          key={index}
+          custom={dir}
+          variants={phoneVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.7}
+          onDragEnd={(_, info) => {
+            const swipe = swipePower(info.offset.x, info.velocity.x);
+            if (swipe < -swipeThreshold) onPaginate(1);
+            if (swipe > swipeThreshold) onPaginate(-1);
+          }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="w-[90%] h-[90%] bg-slate-950 border-[6px] sm:border-[8px] border-slate-800 rounded-[2.5rem] sm:rounded-[3.5rem] shadow-2xl overflow-hidden ring-1 ring-white/10 relative cursor-grab active:cursor-grabbing"
+        >
+          {/* Notch */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-36 h-5 sm:h-7 bg-slate-800 rounded-b-2xl z-20 flex justify-center items-center">
+            <div className="w-12 h-1.5 bg-slate-900 rounded-full opacity-50" />
+          </div>
 
-        {/* Tela */}
-        <div className="relative w-full h-full bg-slate-900">
-          <AnimatePresence mode="popLayout">
+          {/* Tela */}
+          <div className="relative w-full h-full bg-slate-900">
             <motion.img
-              key={index}
+              key={`image-${index}`}
               src={app.image}
               alt={app.title}
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 0.8, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5 }}
               className="absolute inset-0 w-full h-full object-cover"
             />
-          </AnimatePresence>
 
-          {/* Gradiente */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+            {/* Gradiente */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
 
-          {/* Info na base */}
-          <div className="absolute bottom-6 left-4 right-4 sm:bottom-10 sm:left-8 sm:right-8 z-20">
-            <AnimatePresence mode="wait">
+            {/* Info na base */}
+            <div className="absolute bottom-6 left-4 right-4 sm:bottom-10 sm:left-8 sm:right-8 z-20">
               <motion.div
-                key={index}
+                key={`caption-${index}`}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -20, opacity: 0 }}
                 transition={{ delay: 0.15, duration: 0.4 }}
               >
                 <div className="text-white font-bold text-lg sm:text-2xl mb-2">
@@ -177,10 +188,10 @@ function PhoneMockup({ index }: { index: number }) {
                   <div className="h-1.5 w-1/3 rounded-full bg-white/20" />
                 </div>
               </motion.div>
-            </AnimatePresence>
+            </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </AnimatePresence>
 
       {/* Glow */}
       <motion.div
@@ -194,67 +205,91 @@ function PhoneMockup({ index }: { index: number }) {
 
 // ── Componente principal ──────────────────────────────────────────────
 export default function AppShowcase() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const index = useScrollIndex(sectionRef, apps.length);
+  const [[index, dir], setPage] = useState<[number, number]>([0, 0]);
+  const changeTimeoutRef = useRef<number | null>(null);
+
+  const clearPendingChange = useCallback(() => {
+    if (changeTimeoutRef.current !== null) {
+      window.clearTimeout(changeTimeoutRef.current);
+      changeTimeoutRef.current = null;
+    }
+  }, []);
+
+  const schedulePageChange = useCallback(
+    (updater: () => void) => {
+      clearPendingChange();
+      changeTimeoutRef.current = window.setTimeout(() => {
+        updater();
+        changeTimeoutRef.current = null;
+      }, transitionDelayMs);
+    },
+    [clearPendingChange],
+  );
+
+  const paginate = (direction: number) => {
+    schedulePageChange(() => {
+      setPage(([prev]) => [wrapIndex(prev + direction), direction]);
+    });
+  };
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      schedulePageChange(() => {
+        setPage(([prev]) => [wrapIndex(prev + 1), 1]);
+      });
+    }, 7000);
+
+    return () => {
+      window.clearInterval(timer);
+      clearPendingChange();
+    };
+  }, [clearPendingChange, schedulePageChange]);
+
+  const goToSlide = (nextIndex: number) => {
+    schedulePageChange(() => {
+      setPage(([prev]) => [nextIndex, nextIndex > prev ? 1 : -1]);
+    });
+  };
+
   const app = apps[index];
   const phoneOnRight = app.phone === "right";
 
   return (
     <section
-      ref={sectionRef}
       id="apps"
-      className="relative w-full"
-      style={{ height: `${apps.length * 150}vh` }}
+      className="relative w-full py-20 sm:py-24 overflow-x-hidden overflow-y-visible"
     >
-      <div className="sticky top-8 h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full flex flex-col items-center">
-          {/* Mobile: empilhado | Desktop: lado a lado com layout animation */}
-          <LayoutGroup>
-            <motion.div
-              layout
-              className={`w-full flex flex-col items-center gap-6 sm:gap-8 lg:gap-16 ${
-                phoneOnRight
-                  ? "lg:flex-row lg:justify-end"
-                  : "lg:flex-row-reverse lg:justify-between"
-              }`}
-              transition={{
-                layout: {
-                  type: "spring",
-                  stiffness: 60,
-                  damping: 20,
-                  mass: 0.8,
-                },
-              }}
-            >
-              {/* Texto */}
-              <motion.div layout className="flex-1 min-w-0">
-                <AppText index={index} phoneOnRight={phoneOnRight} />
-              </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <div className="w-full flex flex-col items-center gap-8 sm:gap-10 lg:gap-16 lg:flex-row lg:items-center lg:justify-between">
+          <div
+            className={`flex-1 min-w-0 ${phoneOnRight ? "lg:order-1" : "lg:order-2 lg:flex lg:justify-end"}`}
+          >
+            <AppText index={index} dir={dir} phoneOnRight={phoneOnRight} />
+          </div>
 
-              {/* Celular */}
-              <motion.div layout className="flex-shrink-0">
-                <PhoneMockup index={index} />
-              </motion.div>
-            </motion.div>
-          </LayoutGroup>
+          <div
+            className={`shrink-0 ${phoneOnRight ? "lg:order-2" : "lg:order-1"}`}
+          >
+            <PhoneMockup index={index} dir={dir} onPaginate={paginate} />
+          </div>
+        </div>
 
-          {/* Indicadores */}
-          <div className="flex justify-center gap-3 mt-6 lg:mt-0">
+        <div className="mt-10 flex items-center justify-center gap-4 sm:gap-6">
+          <button
+            type="button"
+            onClick={() => paginate(-1)}
+            className="rounded-full border border-white/15 bg-slate-900/50 px-5 py-2 text-sm text-slate-200 transition hover:border-cyan-400/60 hover:text-white"
+            aria-label="Aplicativo anterior"
+          >
+            Anterior
+          </button>
+
+          <div className="flex justify-center gap-3">
             {apps.map((a, i) => (
               <button
                 type="button"
                 key={a.id}
-                onClick={() => {
-                  const el = sectionRef.current;
-                  if (!el) return;
-                  const sectionTop =
-                    el.getBoundingClientRect().top + window.scrollY;
-                  const scrollable = el.offsetHeight - window.innerHeight;
-                  window.scrollTo({
-                    top: sectionTop + ((i + 0.5) / apps.length) * scrollable,
-                    behavior: "smooth",
-                  });
-                }}
+                onClick={() => goToSlide(i)}
                 className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
                   i === index
                     ? "w-10 bg-cyan-400"
@@ -264,6 +299,15 @@ export default function AppShowcase() {
               />
             ))}
           </div>
+
+          <button
+            type="button"
+            onClick={() => paginate(1)}
+            className="rounded-full border border-cyan-500/50 bg-cyan-500/10 px-5 py-2 text-sm text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+            aria-label="Próximo aplicativo"
+          >
+            Próximo
+          </button>
         </div>
       </div>
     </section>

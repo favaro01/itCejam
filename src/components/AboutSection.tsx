@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Hospital, MonitorCheck, Gem } from "lucide-react";
 
@@ -30,59 +30,33 @@ const cards = [
   },
 ];
 
-// ── Hook: qual card está ativo baseado no scroll ──────────────────────
-function useScrollIndex(
-  ref: React.RefObject<HTMLElement | null>,
-  total: number,
-) {
-  const [index, setIndex] = useState(0);
-  const [dir, setDir] = useState(1);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const el = ref.current;
-      if (!el) return;
-      const { top } = el.getBoundingClientRect();
-      const scrollable = el.offsetHeight - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, -top / scrollable));
-      const next = Math.min(total - 1, Math.floor(progress * total));
-
-      setIndex((prev) => {
-        if (prev !== next) setDir(next > prev ? 1 : -1);
-        return next;
-      });
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [ref, total]);
-
-  return { index, dir };
-}
-
-// ── Navegar até um card ───────────────────────────────────────────────
-function scrollToCard(el: HTMLElement | null, i: number, total: number) {
-  if (!el) return;
-  const sectionTop = el.getBoundingClientRect().top + window.scrollY;
-  const scrollable = el.offsetHeight - window.innerHeight;
-  window.scrollTo({
-    top: sectionTop + ((i + 0.5) / total) * scrollable,
-    behavior: "smooth",
-  });
-}
+const wrapIndex = (value: number) => (value + cards.length) % cards.length;
+const swipeThreshold = 9000;
 
 // ── Animação dos cards ────────────────────────────────────────────────
 const slideVariants = {
-  enter: (d: number) => ({ y: d > 0 ? 80 : -80, opacity: 0, scale: 0.95 }),
-  center: { y: 0, opacity: 1, scale: 1 },
-  exit: (d: number) => ({ y: d > 0 ? -80 : 80, opacity: 0, scale: 0.95 }),
+  enter: (d: number) => ({ x: d > 0 ? 120 : -120, opacity: 0, scale: 0.95 }),
+  center: { x: 0, opacity: 1, scale: 1 },
+  exit: (d: number) => ({ x: d > 0 ? -120 : 120, opacity: 0, scale: 0.95 }),
 };
 
-function CardStack({ index, dir }: { index: number; dir: number }) {
+function swipePower(offset: number, velocity: number) {
+  return Math.abs(offset) * velocity;
+}
+
+function CardStack({
+  index,
+  dir,
+  onPaginate,
+}: {
+  index: number;
+  dir: number;
+  onPaginate: (direction: number) => void;
+}) {
   const card = cards[index];
+
   return (
-    <div className="relative h-[320px] sm:h-[380px] md:h-[420px]">
+    <div className="relative h-80 sm:h-95 md:h-105">
       <AnimatePresence initial={false} custom={dir} mode="wait">
         <motion.div
           key={index}
@@ -91,8 +65,16 @@ function CardStack({ index, dir }: { index: number; dir: number }) {
           initial="enter"
           animate="center"
           exit="exit"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.6}
+          onDragEnd={(_, info) => {
+            const swipe = swipePower(info.offset.x, info.velocity.x);
+            if (swipe < -swipeThreshold) onPaginate(1);
+            if (swipe > swipeThreshold) onPaginate(-1);
+          }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0"
+          className="absolute inset-0 cursor-grab active:cursor-grabbing"
         >
           <div className="group flex-col relative overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900/50 border border-white/10 p-8 sm:p-8 md:p-12 backdrop-blur-sm h-full hover:border-cyan-400/50 transition-colors duration-500">
             <div className="absolute -right-10 -top-20 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] group-hover:bg-cyan-400/20 transition-all" />
@@ -124,66 +106,90 @@ function CardStack({ index, dir }: { index: number; dir: number }) {
 
 // ── Componente principal ──────────────────────────────────────────────
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { index, dir } = useScrollIndex(sectionRef, cards.length);
+  const [[index, dir], setPage] = useState<[number, number]>([0, 0]);
+
+  const paginate = (direction: number) => {
+    setPage(([prev]) => [wrapIndex(prev + direction), direction]);
+  };
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setPage(([prev]) => [wrapIndex(prev + 1), 1]);
+    }, 6500);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const goToCard = (nextIndex: number) => {
+    setPage(([prev]) => [nextIndex, nextIndex > prev ? 1 : -1]);
+  };
 
   return (
-    <section
-      ref={sectionRef}
-      id="about"
-      className="relative w-full"
-      style={{ height: `${cards.length * 150}vh` }}
-    >
-      <div className="sticky top-0 h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center w-full">
-          {/* Lado esquerdo — fixo */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="text-cyan-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2 sm:mb-4 block">
-              Nossos Pilares
+    <section id="about" className="relative w-full py-20 sm:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center w-full">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="text-cyan-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2 sm:mb-4 block">
+            Nossos Pilares
+          </span>
+          <h2 className="font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-4 sm:mb-6">
+            O{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-600">
+              DNA
+            </span>{" "}
+            <br />
+            da Inovação.
+          </h2>
+          <p className="text-slate-400 text-sm sm:text-base lg:text-lg max-w-md leading-relaxed mb-6 sm:mb-8">
+            Navegue pelo carrossel para conhecer quem somos, o que fazemos e os
+            valores que guiam nossa evolução.
+          </p>
+
+          <div className="flex items-center gap-3">
+            {cards.map((c, i) => (
+              <button
+                type="button"
+                key={c.id}
+                onClick={() => goToCard(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
+                  i === index
+                    ? "w-10 bg-cyan-400"
+                    : "w-4 bg-slate-700 hover:bg-slate-600"
+                }`}
+                aria-label={`Ir para ${c.title}`}
+              />
+            ))}
+            <span className="text-slate-600 text-xs font-mono ml-2">
+              0{index + 1} / 0{cards.length}
             </span>
-            <h2 className="font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-4 sm:mb-6">
-              O{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
-                DNA
-              </span>{" "}
-              <br />
-              da Inovação.
-            </h2>
-            <p className="text-slate-400 text-sm sm:text-base lg:text-lg max-w-md leading-relaxed mb-6 sm:mb-8">
-              Mergulhe na nossa arquitetura. Aqui a tecnologia não é suporte, é
-              estratégia vital.
-            </p>
+          </div>
+        </motion.div>
 
-            {/* Indicadores */}
-            <div className="flex items-center gap-3">
-              {cards.map((c, i) => (
-                <button
-                  type="button"
-                  key={c.id}
-                  onClick={() =>
-                    scrollToCard(sectionRef.current, i, cards.length)
-                  }
-                  className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
-                    i === index
-                      ? "w-10 bg-cyan-400"
-                      : "w-4 bg-slate-700 hover:bg-slate-600"
-                  }`}
-                  aria-label={`Ir para ${c.title}`}
-                />
-              ))}
-              <span className="text-slate-600 text-xs font-mono ml-2">
-                0{index + 1} / 0{cards.length}
-              </span>
-            </div>
-          </motion.div>
+        <div className="space-y-4">
+          <CardStack index={index} dir={dir} onPaginate={paginate} />
 
-          {/* Lado direito — cards que trocam */}
-          <CardStack index={index} dir={dir} />
+          <div className="flex items-center justify-between gap-4">
+            <button
+              type="button"
+              onClick={() => paginate(-1)}
+              className="rounded-full border border-white/15 bg-slate-900/50 px-5 py-2 text-sm text-slate-200 transition hover:border-cyan-400/60 hover:text-white"
+              aria-label="Card anterior"
+            >
+              Anterior
+            </button>
+            <button
+              type="button"
+              onClick={() => paginate(1)}
+              className="rounded-full border border-cyan-500/50 bg-cyan-500/10 px-5 py-2 text-sm text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+              aria-label="Próximo card"
+            >
+              Próximo
+            </button>
+          </div>
         </div>
       </div>
     </section>

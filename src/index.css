@@ -34,6 +34,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
   color: #e2e8f0;
   width: 100%;
   overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 #root {

@@ -67,7 +67,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <Link
-            to="apps"
+            to="sistemas"
             className="hidden rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-sm font-medium text-white transition-shadow hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] md:inline-block"
           >
             Sistemas
